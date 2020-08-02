@@ -1,0 +1,51 @@
+html, body {
+    margin:0px;
+    height:100%;
+}
+
+.container {
+    height: 100%;
+}
+
+.header {
+    background-color: antiquewhite;
+    padding: 15px;
+    height: 15%;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    display: inline-block;
+    margin-top: 50px;
+}
+
+li {
+    display: inline;
+}
+
+li a {
+    color: black;
+    text-align: center;
+    padding: 14px 30px;
+    font-size: larger;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: bisque;
+}
+
+.logo {
+    width: 120px;
+    height:120px;
+    float:right;
+    margin-right: 220px;
+}
+
+.footer {
+    background-color: antiquewhite;
+    text-align: center;
+    padding: 10px;
+    margin-top: 7px;
+}
