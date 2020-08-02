@@ -4,24 +4,62 @@
     <meta charset="UTF-8">
     <title>CS335 Assignment1</title>
     <link rel="stylesheet" href="ywu660.css">
+    <script src="ywu660.js"></script>
 </head>
 <body>
 <!--- THIS IS THE AREA OF THE HOME PAGE-->
 <div class="container">
     <div class="header">
-        <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
         <ul class="navigationBar">
             <li><a class="active" href="#home">Home</a></li>
             <li><a href="#contact">Products</a></li>
             <li><a href="#contact">Location</a></li>
             <li><a href="#news">News</a></li>
-            <li><a href="#about">Guest Book</a></li>
+            <li onclick="showTap('guestBookTap')" ><a>Guest Book</a></li>
         </ul>
+        <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
     </div>
 
     <div class="main">
         <h1>Dunedin Dairy</h1>
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+    </div>
+
+    <div class="productsTap" style="visibility: hidden">
+
+    </div>
+
+    <div class="locationTap">
+
+    </div>
+
+    <div class = "newsTap">
+
+    </div>
+
+    <div id="guestBookTap">
+        <div class="form">
+            <h1>Comment</h1>
+            <div class="info">
+                <input class="fname" type="text" name="name" placeholder="Full name">
+                <input type="text" name="name" placeholder="Email">
+                <input type="text" name="name" placeholder="Phone number">
+            </div>
+            <p>Message</p>
+            <div>
+                <textarea rows="10" placeholder="Please leave the comment."></textarea>
+            </div>
+            <button onclick="submitSuccessful()">Submit</button>
+        </div>
+
+
+        <!--Confirmation box showing after the user click a submit -->
+        <div id="submitModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p>Thank you!</p>
+            </div>
+        </div>
     </div>
 
     <div class="footer" >©All right reserved ywu660</div>
