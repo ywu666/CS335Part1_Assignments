@@ -11,33 +11,38 @@
 <div class="container">
     <div class="header">
         <ul class="navigationBar">
-            <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#contact">Products</a></li>
+            <li><a class="active" href="#home" onclick="showTap('main')">Home</a></li>
+            <li><a href="#items" onclick="showTap('productsTap')">Products</a></li>
             <li><a href="#contact">Location</a></li>
             <li><a href="#news">News</a></li>
-            <li onclick="showTap('guestBookTap')" ><a>Guest Book</a></li>
+            <li><a href="#comment" onclick="showTap('guestBookTap')">Guest Book</a></li>
         </ul>
         <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
     </div>
-
-    <div class="main">
+    <!---main Area -->
+    <div class="tap" id="main">
         <h1>Dunedin Dairy</h1>
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
     </div>
 
-    <div class="productsTap" style="visibility: hidden">
+    <div class="tap" id="productsTap">
+        <form id="search">
+            <input type="text" placeholder="Search..">
+            <button>Search</button>
+        </form>
 
     </div>
 
-    <div class="locationTap">
+    <div class="tap" id="locationTap">
 
     </div>
 
-    <div class = "newsTap">
+    <div class="tap" id="newsTap">
 
     </div>
 
-    <div id="guestBookTap">
+    <!-- This is the area of the guest book area-->
+    <div class="tap" id="guestBookTap">
         <div class="form">
             <h1>Comment</h1>
             <div class="info">
@@ -47,11 +52,10 @@
             </div>
             <p>Message</p>
             <div>
-                <textarea rows="10" placeholder="Please leave the comment."></textarea>
+                <textarea rows="14" placeholder="Please leave the comment."></textarea>
             </div>
             <button onclick="submitSuccessful()">Submit</button>
         </div>
-
 
         <!--Confirmation box showing after the user click a submit -->
         <div id="submitModal" class="modal">
@@ -70,6 +74,5 @@
 <!-- THIS IS THE AREA OF THE LOCATION PAGE -->
 
 <!-- THIS IS THE AREA OF THE NEWS PAGE -->
-
 </body>
 </html>
