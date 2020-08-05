@@ -7,6 +7,7 @@
     <script src="ywu660.js"></script>
 </head>
 <body>
+
 <!--- THIS IS THE AREA OF THE HOME PAGE-->
 <div class="container">
     <div class="header">
@@ -33,8 +34,8 @@
     <div class="tap" id="productsTap">
         <h1>Products</h1>
         <div id="search">
-            <input type="text" placeholder="Search..">
-            <button>Search</button>
+            <input id="searchTerm" type="text" placeholder="Search..">
+            <button onclick="search( document.getElementById( 'searchTerm' ).value )">Search</button>
         </div>
         <table id="showProducts"></table>
     </div>
@@ -43,10 +44,11 @@
     <div class="tap" id="locationTap">
         <h1 style="">Locations</h1>
         <img class="map" src="http://redsox.uoa.auckland.ac.nz/ds/map.png" alt="Locations">
+
         <div class="footer">
-        <p>Address: 535 Pine Road Dunedin New Zealand &nbsp;&nbsp;&nbsp;
-            Email: info@DunedinDairy.co.nz &nbsp;&nbsp;&nbsp; Phone: +64 012 345 6789</p>
-        <p>Add us to your address book.</p>
+            <p>Address: 535 Pine Road Dunedin New Zealand &nbsp;&nbsp;&nbsp;
+                Email: info@DunedinDairy.co.nz &nbsp;&nbsp;&nbsp; Phone: +64 012 345 6789</p>
+            <p>Add us to your address book.</p>
         </div>
     </div>
 

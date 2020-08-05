@@ -1,10 +1,11 @@
 function showTap ( id ) {
     hideTaps();
-    if( id === "productsTap" ) {
+
+    if ( id === "productsTap" ) {
         getProducts();
     }
 
-    if( id === "newsTap" ) {
+    if ( id === "newsTap" ) {
         getNews();
     }
 
@@ -13,23 +14,13 @@ function showTap ( id ) {
 
 function hideTaps() {
     const list = document.getElementsByClassName("tap");
-    for(var i=0; i<list.length; i++) {
+    for( var i = 0; i < list.length; i++ ) {
         list[i].style.display = "none";
     }
 }
 
-function submitComment( comment ) {
-    fetch("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/", { method: 'POST' })
-        .then( response =>
-            response.status
-        )
-        .then( data =>
-            console.log( data )
-        );
-}
-
 function getProducts() {
-    fetch(" http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",{
+    fetch (" http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",{
         headers: {
             'Accept': 'application/json',
         },
@@ -38,7 +29,6 @@ function getProducts() {
             response.json()
         )
         .then( data => {
-            console.log(data);
             showProducts( data )
         } );
 }
@@ -47,11 +37,11 @@ function showProducts( products ) {
     let tableContent = "";
     let count = 0;
 
-    for (let i = 0; i < products.length; i++) {
+    for ( let i = 0; i < products.length; i++ ) {
         const record = products[i];
 
-        tableContent += "<td>" +
-            "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
+        tableContent += "<td>"
+            + "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
             + "<h3>" + record.Title + "</h3>"
             + "<figcaption>"+ record.Origin + " Price: $" + record.Price + " " + record.Type +"</figcaption>"
             + "<button class='buyBtn' value='" + record.ItemID + "'>Buy Now</button>"
@@ -63,20 +53,20 @@ function showProducts( products ) {
             count = 0;
         }
     }
+
     document.getElementById("showProducts").innerHTML = tableContent;
 }
 
 function getNews () {
-    fetch(" http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news",{
+    fetch (" http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news",{
         headers: {
             'Accept': 'application/json',
         },
-    })
+    } )
         .then( response =>
             response.json()
         )
         .then( data => {
-            console.log( data );
             showNews( data )
         } );
 }
@@ -86,8 +76,8 @@ function showNews( news ) {
 
     for( let i=0; i< news.length; i++ ) {
         const record = news[i];
-        newsContent += "<td>" +
-            "<img src=' " + record.enclosureField.urlField + " '/>"
+        newsContent += "<td>"
+            + "<img src=' " + record.enclosureField.urlField + " '/>"
             + "<h2> <a href='" + record.linkField + "' target=\"_blank\">" + record.titleField + "</a></h2>"
             + "<h2>"+ record.pubDateField + "</h2>"
             + "<p>"+ record.descriptionField + "</p>"
@@ -96,5 +86,30 @@ function showNews( news ) {
     }
 
     document.getElementById("showNews").innerHTML = newsContent;
+}
+
+/*onClick buttons functions*/
+function submitComment( comment ) {
+    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/", { method: 'POST' })
+        .then( response =>
+            response.status
+        )
+        .then( data =>
+            console.log( data )
+        );
+}
+
+function search( data ) {
+    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term=" + data, {
+        headers: {
+            'Accept': 'application/json',
+        },
+    } )
+        .then( response =>
+            response.json()
+        )
+        .then( data =>
+            showProducts( data )
+        );
 }
 
