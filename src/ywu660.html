@@ -14,7 +14,7 @@
             <li><a class="active" href="#home" onclick="showTap('main')"><span>&#127968;</span>Home</a></li>
             <li><a href="#items" onclick="showTap('productsTap')"><span>&#128722;</span>Products</a></li>
             <li><a href="#locations" onclick="showTap('locationTap')"><span>&#128204;</span>Location</a></li>
-            <li><a href="#news" onclick="showTap('NewsTap')"><span>&#128240;</span>News</a></li>
+            <li><a href="#news" onclick="showTap('newsTap')"><span>&#128240;</span>News</a></li>
             <li><a href="#comment" onclick="showTap('guestBookTap')"><span>&#128214;</span>Guest Book</a></li>
         </ul>
         <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
@@ -32,6 +32,7 @@
             <input type="text" placeholder="Search..">
             <button>Search</button>
         </form>
+        <table id="showProducts"></table>
     </div>
 
     <div class="tap" id="locationTap">
@@ -46,6 +47,7 @@
 
     <div class="tap" id="newsTap">
         <h1>News</h1>
+        <div id="showNews"></div>
 
     </div>
 
@@ -63,14 +65,6 @@
             <button onclick="submitSuccessful()">Submit</button>
         </div>
         <h1>Comments</h1>
-
-        <!--Confirmation box showing after the user click a submit -->
-        <div id="submitModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <p>Thank you!</p>
-            </div>
-        </div>
     </div>
 </div>
 
