@@ -1,4 +1,3 @@
-
 function showTap ( id ) {
     hideTaps();
     if( id === "productsTap" ) {
@@ -27,7 +26,7 @@ function submitComment( comment ) {
         .then( data =>
             console.log( data )
         );
- }
+}
 
 function getProducts() {
     fetch(" http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",{
@@ -49,22 +48,22 @@ function showProducts( products ) {
     let count = 0;
 
     for (let i = 0; i < products.length; i++) {
-            const record = products[i];
+        const record = products[i];
 
-            tableContent += "<td>" +
-                "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>" +
-                "<h3>" + record.Title + "</h3>" +
-                "<figcaption>"+ record.Origin + " Price: $" + record.Price + " " + record.Type +"</figcaption>" +
-                "<button class='buyBtn' value='" + record.ItemID + "'>Buy Now</button>" +
-                "</td>";
-            count += 1;
+        tableContent += "<td>" +
+            "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
+            + "<h3>" + record.Title + "</h3>"
+            + "<figcaption>"+ record.Origin + " Price: $" + record.Price + " " + record.Type +"</figcaption>"
+            + "<button class='buyBtn' value='" + record.ItemID + "'>Buy Now</button>"
+            + "</td>";
+        count += 1;
 
-            if (count > 2) {
-                tableContent += "</tr>\n";
-                count = 0;
-            }
+        if (count > 2) {
+            tableContent += "</tr>\n";
+            count = 0;
         }
-        document.getElementById("showProducts").innerHTML = tableContent;
+    }
+    document.getElementById("showProducts").innerHTML = tableContent;
 }
 
 function getNews () {
@@ -77,13 +76,25 @@ function getNews () {
             response.json()
         )
         .then( data => {
-            console.log(data);
+            console.log( data );
             showNews( data )
         } );
-
 }
 
 function showNews( news ) {
+    var newsContent = "";
 
+    for( let i=0; i< news.length; i++ ) {
+        const record = news[i];
+        newsContent += "<td>" +
+            "<img src=' " + record.enclosureField.urlField + " '/>"
+            + "<h2> <a href='" + record.linkField + "' target=\"_blank\">" + record.titleField + "</a></h2>"
+            + "<h2>"+ record.pubDateField + "</h2>"
+            + "<p>"+ record.descriptionField + "</p>"
+            + "</td>"
+            + "</tr>\n"
+    }
+
+    document.getElementById("showNews").innerHTML = newsContent;
 }
 
