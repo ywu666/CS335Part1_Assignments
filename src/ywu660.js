@@ -89,14 +89,33 @@ function showNews( news ) {
 }
 
 /*onClick buttons functions*/
-function submitComment( comment ) {
-    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/", { method: 'POST' })
+function submitComment() {
+    const name = document.getElementById("fname").value;
+    const comment = document.getElementById("message").value;
+
+    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + name, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify( comment )
+    })
         .then( response =>
+        {
+            response.onload = showComment();
             response.status
+        }
         )
-        .then( data =>
-            console.log( data )
-        );
+        .then( data => {
+            console.log(data)
+        } );
+}
+
+function showComment() {
+    document.getElementById("fname").value = "";
+    document.getElementById("message").value = "";
+    document.getElementById("recentEntries").src = "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments";
 }
 
 function search( data ) {
