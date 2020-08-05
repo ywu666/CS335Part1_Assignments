@@ -48,7 +48,6 @@ function getProducts() {
         } );
 }
 
-
 function showProducts( products ) {
     let tableContent = "";
     let counter = 0;
@@ -58,7 +57,7 @@ function showProducts( products ) {
 
             tableContent += "<td>" +
                 "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>" +
-                "<figcaption>" + record.Title + "</figcaption>" +
+                "<h3>" + record.Title + "</h3>" +
                 "<figcaption>"+ record.Origin + " " + record.Price + " " + record.Type +"</figcaption>" +
                 "<button class='buyBtn' value='" + record.ItemID + "'>Buy Now</button>" +
                 "</td>";
@@ -71,13 +70,4 @@ function showProducts( products ) {
             }
         }
         document.getElementById("showProducts").innerHTML = tableContent;
-}
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function( event) {
-    const modal = document.getElementById("submitModal");
-
-    if ( event.target == modal ) {
-        modal.style.display = "none";
-    }
 }
