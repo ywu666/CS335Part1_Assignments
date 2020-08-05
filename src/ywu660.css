@@ -15,8 +15,12 @@ html, body {
     text-align: center;
 }
 
-h1 {
+h1, p {
     padding-left: 2%;
+}
+
+p {
+    font-size: 16px;
 }
 
 ul {
@@ -70,7 +74,6 @@ span {
 #guestBookTap .form {
     padding-left: 35px;
     margin: 0px;
-    box-shadow: 0 2px 5px #f5f5f5;
 }
 
 #guestBookTap input, textarea {
@@ -99,9 +102,8 @@ span {
     opacity: 0.8;
 }
 
-#productsTap form {
+#productsTap #search {
     padding-left: 2%;
-    box-shadow: 0 2px 5px #f5f5f5;
 }
 
 #productsTap input {
@@ -109,7 +111,6 @@ span {
     width: calc(50% - 18px);
     padding: 10px;
     font-size: 16px;
-    margin-bottom: 20px;
     outline:none;
 }
 
@@ -127,18 +128,18 @@ table {
 }
 
 table td {
-    border: solid 2px 	#d5d5dd;
+    border-bottom: 1px solid #ddd;
     padding-bottom: 3%;
 }
 
 table img {
     height:30%;
     display:inline-block;
+    margin-top: 2%;
 }
 
 table figcaption {
     font-size: 14px;
-    font-weight: bold;
 }
 
 @media only screen and (max-width:620px) {
