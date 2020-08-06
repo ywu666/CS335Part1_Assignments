@@ -19,7 +19,6 @@
             <a href="#comment" onclick="showTap('guestBookTap')"><span>&#128214;</span>Guest Book</a>
             <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
     </div>
-
     <!---main Area -->
     <!-- THIS IS THE AREA OF THE HOME PAGE-->
     <div class="tap" id="main" style="display: block">
@@ -33,7 +32,7 @@
     <div class="tap" id="productsTap">
         <h1>Products</h1>
         <div id="search">
-            <input id="searchTerm" type="text" placeholder="Search..">
+            <input oninput="search( this.value )" id="searchTerm" type="text" placeholder="Search..">
             <button onclick="search( document.getElementById( 'searchTerm' ).value )">Search</button>
         </div>
         <table id="showProducts"></table>
@@ -45,10 +44,13 @@
         <img class="map" src="http://redsox.uoa.auckland.ac.nz/ds/map.png" alt="Locations">
 
         <div class="footer">
-            <p>Address: 535 Pine Road Dunedin New Zealand &nbsp;&nbsp;&nbsp;
-                Email: info@DunedinDairy.co.nz &nbsp;&nbsp;&nbsp; Phone: +64 012 345 6789
+            <p>Address: 535 Pine Road Dunedin New Zealand <br>
+                Email: <a href="mailto:info@DunedinDairy.co.nz">info@DunedinDairy.co.nz</a>
+                Phone:<a href="tel:+64 03 448 6256">+64 3 448 6256‬</a>
+                <a href="http://redsox.uoa.auckland.ac.nz/ds/mecard.svg" target="_blank"><br>
+                    Add us to your address book.
+                </a>
             </p>
-            <p>Add us to your address book.</p>
         </div>
     </div>
 
@@ -72,7 +74,7 @@
             <button onclick="submitComment();">Submit</button>
         </div>
         <h1>Recent Entries</h1>
-        <iframe id="recentEntries" src="http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments"></iframe>
+        <iframe id="recentEntries" src="http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments" ></iframe>
     </div>
 </div>
 </body>

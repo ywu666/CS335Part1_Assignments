@@ -67,6 +67,7 @@ function getNews () {
             response.json()
         )
         .then( data => {
+            console.log(data);
             showNews( data )
         } );
 }
@@ -105,8 +106,7 @@ function submitComment() {
         {
             response.onload = showComment();
             response.status
-        }
-        )
+        } )
         .then( data => {
             console.log(data)
         } );
