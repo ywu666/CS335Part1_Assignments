@@ -127,10 +127,6 @@ table figcaption {
     text-align: left;
 }
 
-#showNews td{
-    border-bottom: 1px solid black;
-}
-
 #showNews a {
     text-decoration: none;
     color: black;
