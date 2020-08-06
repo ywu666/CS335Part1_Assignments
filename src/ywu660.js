@@ -14,8 +14,8 @@ function showTap ( id ) {
 
 function hideTaps() {
     const list = document.getElementsByClassName("tap");
-    for( var i = 0; i < list.length; i++ ) {
-        list[i].style.display = "none";
+    for( let i = 0; i < list.length; i++ ) {
+        list[ i ].style.display = "none";
     }
 }
 
@@ -38,7 +38,7 @@ function showProducts( products ) {
     let count = 0;
 
     for ( let i = 0; i < products.length; i++ ) {
-        const record = products[i];
+        const record = products [i ];
 
         tableContent += "<td>"
             + "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
@@ -48,7 +48,7 @@ function showProducts( products ) {
             + "</td>";
         count += 1;
 
-        if (count > 2) {
+        if ( count > 2 ) {
             tableContent += "</tr>\n";
             count = 0;
         }
@@ -73,10 +73,10 @@ function getNews () {
 }
 
 function showNews( news ) {
-    var newsContent = "";
+    let newsContent = "";
 
-    for( let i=0; i< news.length; i++ ) {
-        const record = news[i];
+    for( let i = 0; i < news.length; i++ ) {
+        const record = news[ i ];
         newsContent += "<td>"
             + "<img src=' " + record.enclosureField.urlField + " '/>"
             + "<h2> <a href='" + record.linkField + "' target=\"_blank\">" + record.titleField + "</a></h2>"
@@ -101,7 +101,7 @@ function submitComment() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify( comment )
-    })
+    } )
         .then( response =>
         {
             response.onload = showComment();
@@ -113,8 +113,11 @@ function submitComment() {
 }
 
 function showComment() {
+    //clear the form
     document.getElementById("fname").value = "";
     document.getElementById("message").value = "";
+
+    //Renew the comment after submit
     document.getElementById("recentEntries").src = "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments";
 }
 
