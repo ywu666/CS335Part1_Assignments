@@ -40,7 +40,7 @@ span {
 }
 
 iframe {
-    width: 50%;
+    width: 80%;
     height: 250px;
 }
 
@@ -146,4 +146,13 @@ table figcaption {
         text-align: center;
         float: none;
     }
+
+    td {
+        display:inline-block;
+    }
+
+    table img {
+        width: 20%;
+    }
+
 }
