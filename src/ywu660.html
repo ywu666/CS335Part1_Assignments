@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CS335 Assignment1</title>
     <link rel="stylesheet" href="ywu660.css">
     <script src="ywu660.js"></script>
@@ -10,41 +11,37 @@
 
 <!--- THIS IS THE AREA OF THE NAVIGATION BAR-->
 <div class="container">
-    <div class="header">
-        <ul class="navigationBar">
-            <li><a class="active" href="#home" onclick="showTap('main')"><span>&#127968;</span>Home</a></li>
-            <li><a href="#items" onclick="showTap('productsTap')"><span>&#128722;</span>Products</a></li>
-            <li><a href="#locations" onclick="showTap('locationTap')"><span>&#128204;</span>Location</a></li>
-            <li><a href="#news" onclick="showTap('newsTap')"><span>&#128240;</span>News</a></li>
-            <li><a href="#comment" onclick="showTap('guestBookTap')"><span>&#128214;</span>Guest Book</a></li>
-        </ul>
-        <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
+    <div id="navigationBar">
+            <a class="active" href="#home" onclick="showTap('main')"><span>&#127968;</span>Home</a>
+            <a href="#items" onclick="showTap('productsTap')"><span>&#128722;</span>Products</a>
+            <a href="#locations" onclick="showTap('locationTap')"><span>&#128204;</span>Location</a>
+            <a href="#news" onclick="showTap('newsTap')"><span>&#128240;</span>News</a>
+            <a href="#comment" onclick="showTap('guestBookTap')"><span>&#128214;</span>Guest Book</a>
+            <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
     </div>
 
     <!---main Area -->
     <!-- THIS IS THE AREA OF THE HOME PAGE-->
     <div class="tap" id="main" style="display: block">
-        <h1> Dunedin Dairy </h1>
-        <p>
-            Welcome to the Dunedin Dairy. The Duendin Dairy is a leading online dairy shop in New Zealand.<br>
+        <h1>Dunedin Dairy</h1>
+        <p>Welcome to the Dunedin Dairy. The Duendin Dairy is a leading online dairy shop in New Zealand.<br>
             We take pride in sourcing with the best dairy products from within the New Zealand and abroad.<br>
-            Our shop is open 24 hours 7 days, and we strive to deliver your purchases promptly.
-        </p>
+            Our shop is open 24 hours 7 days, and we strive to deliver your purchases promptly.</p>
     </div>
 
     <!-- THIS IS THE AREA OF THE PRODUCT PAGE-->
     <div class="tap" id="productsTap">
-        <h1> Products </h1>
+        <h1>Products</h1>
         <div id="search">
             <input id="searchTerm" type="text" placeholder="Search..">
-            <button onclick="search( document.getElementById( 'searchTerm' ).value )"> Search </button>
+            <button onclick="search( document.getElementById( 'searchTerm' ).value )">Search</button>
         </div>
         <table id="showProducts"></table>
     </div>
 
     <!-- THIS IS THE AREA OF THE LOCATION PAGE -->
     <div class="tap" id="locationTap">
-        <h1 style=""> Locations </h1>
+        <h1 style="">Locations</h1>
         <img class="map" src="http://redsox.uoa.auckland.ac.nz/ds/map.png" alt="Locations">
 
         <div class="footer">
@@ -57,7 +54,7 @@
 
     <!-- THIS IS THE AREA OF THE NEWS PAGE -->
     <div class="tap" id="newsTap">
-        <h1> News </h1>
+        <h1>News</h1>
         <table id="showNews"></table>
     </div>
 
@@ -66,13 +63,13 @@
         <h1> Guest Book </h1>
         <div class="form">
             <div class="info">
-                <input id="fname" class="comment" type="text" name="name" placeholder="Full name">
+                <input id="fname" type="text" name="name" placeholder="Full name">
             </div>
             <p>Message</p>
             <div>
-                <textarea id="message" class="comment" rows="6" placeholder="Please leave the comment."></textarea>
+                <textarea id="message" rows="4" placeholder="Please leave the comment."></textarea>
             </div>
-            <button onclick="submitComment();"> Submit </button>
+            <button onclick="submitComment();">Submit</button>
         </div>
         <h1>Recent Entries</h1>
         <iframe id="recentEntries" src="http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments"></iframe>

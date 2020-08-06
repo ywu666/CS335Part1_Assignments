@@ -6,16 +6,6 @@ html, body {
     font-size: 14px;
 }
 
-.container {
-    height: 100%;
-}
-
-.header {
-    background-color: antiquewhite;
-    padding: 15px;
-    text-align: center;
-}
-
 .tap {
     padding-left: 2%;
 }
@@ -24,30 +14,30 @@ p {
     font-size: 16px;
 }
 
-ul {
-    list-style-type: none;
-    display: inline-block;
+#navigationBar {
+    overflow: auto;
     margin-top: 5px;
-}
-
-li {
-    display: inline;
-}
-
-li a {
-    color: black;
+    background-color: antiquewhite;
+    padding: 15px;
     text-align: center;
-    padding: 14px 16px;
-    font-size: larger;
-    text-decoration: none;
+    align-items: center;
 }
 
-li a:hover {
+#navigationBar a {
+
+    padding: 12px;
+    color: black;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#navigationBar a:hover {
     background-color: bisque;
 }
 
 span {
- font-size: 30px;
+ font-size: 4vw;
 }
 
 iframe {
@@ -55,12 +45,17 @@ iframe {
     height: 250px;
 }
 
+.tap {
+    display: none;
+    overflow-x: auto;
+}
+
 .logo {
     width: 6%;
 }
 
 .map {
-    max-width:50%;
+    max-width: 50%;
     height: auto;
     display: block;
     margin-left: auto;
@@ -72,17 +67,8 @@ iframe {
     padding-bottom: 10px;
 }
 
-.tap {
-    display: none;
-    height: 78%;
-}
-
-#guestBookTap .form {
-    margin: 0px;
-}
-
 #guestBookTap input, textarea {
-    width: calc(50% - 18px);
+    width: calc(80% - 18px);
     padding: 8px;
     margin-bottom: 20px;
     border: 1px solid darkgray;
@@ -90,7 +76,7 @@ iframe {
 }
 
 #guestBookTap input::placeholder {
-    color: #666;
+    color: #666666;
 }
 
 #guestBookTap button, #productsTap button {
@@ -99,24 +85,19 @@ iframe {
     outline: none;
     background: antiquewhite;
     font-size: 16px;
-    font-weight: 400;
     color: black;
 }
 
 #guestBookTap button{
-    width: 50%;
+    width: 80%;
 }
 
-#guestBookTap button:hover {
-    background: bisque;
-}
-
-#productsTap button:hover {
+#guestBookTap button:hover, #productsTap button:hover  {
     background: bisque;
 }
 
 #productsTap input {
-    float:left;
+    float: left;
     width: calc(50% - 18px);
     padding: 10px;
     font-size: 16px;
@@ -130,7 +111,7 @@ table {
 
 table td {
     border-bottom: 1px solid #ddd;
-    padding-bottom: 3%;
+    padding-bottom: 2%;
 }
 
 table img {
@@ -140,12 +121,13 @@ table img {
 }
 
 table figcaption {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 #showNews {
     text-align: left;
 }
+
 #showNews td{
     border-bottom: 1px solid black;
 }
@@ -161,11 +143,7 @@ table figcaption {
 
 @media only screen and (max-width:620px) {
     /* For mobile phones: */
-    .tap {
-        width: 100%;
-    }
-
-    ul li a {
+    #navigationBar a {
         text-align: center;
         float: none;
     }
