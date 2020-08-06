@@ -118,7 +118,7 @@ function showComment() {
     document.getElementById("message").value = "";
 
     //Renew the comment after submit
-    document.getElementById("recentEntries").src = "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments";
+    document.getElementById("recentEntries").src = document.getElementById("recentEntries").src;
 }
 
 function search( data ) {
