@@ -136,6 +136,10 @@ table figcaption {
     background-color: bisque;
 }
 
+#locationTap a {
+    color: blue;
+}
+
 @media only screen and (max-width:620px) {
     /* For mobile phones: */
     #navigationBar a {
