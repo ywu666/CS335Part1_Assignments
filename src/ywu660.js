@@ -13,7 +13,7 @@ function showTap ( id ) {
 }
 
 function hideTaps() {
-    const list = document.getElementsByClassName("tap");
+    const list = document.getElementsByClassName( "tap" );
     for( let i = 0; i < list.length; i++ ) {
         list[ i ].style.display = "none";
     }
@@ -54,7 +54,7 @@ function showProducts( products ) {
         }
     }
 
-    document.getElementById("showProducts").innerHTML = tableContent;
+    document.getElementById( "showProducts" ).innerHTML = tableContent;
 }
 
 function getNews () {
@@ -86,13 +86,13 @@ function showNews( news ) {
             + "</tr>\n"
     }
 
-    document.getElementById("showNews").innerHTML = newsContent;
+    document.getElementById( "showNews" ).innerHTML = newsContent;
 }
 
 /*onClick buttons functions*/
 function submitComment() {
-    const name = document.getElementById("fname").value;
-    const comment = document.getElementById("message").value;
+    const name = document.getElementById( "fname" ).value;
+    const comment = document.getElementById( "message" ).value;
 
     fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + name, {
         method: 'POST',
@@ -102,23 +102,22 @@ function submitComment() {
         },
         body: JSON.stringify( comment )
     } )
-        .then( response =>
-        {
+        .then( response => {
             response.onload = showComment();
-            response.status
+            response.status;
         } )
         .then( data => {
-            console.log(data)
+            console.log( data )
         } );
 }
 
 function showComment() {
     //clear the form
-    document.getElementById("fname").value = "";
-    document.getElementById("message").value = "";
+    document.getElementById( "fname" ).value = "";
+    document.getElementById( "message" ).value = "";
 
     //Renew the comment after submit
-    document.getElementById("recentEntries").src = document.getElementById("recentEntries").src;
+    document.getElementById( "recentEntries" ).src = document.getElementById( "recentEntries" ).src;
 }
 
 function search( data ) {
