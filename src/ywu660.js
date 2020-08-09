@@ -9,6 +9,10 @@ function showTap ( id ) {
         getNews();
     }
 
+    if(id === "locationTap") {
+        getLocations();
+    }
+
     document.getElementById( id ).style.display = "block";
 }
 
@@ -67,7 +71,7 @@ function getNews () {
             response.json()
         )
         .then( data => {
-            console.log(data);
+            console.log( data );
             showNews( data )
         } );
 }
@@ -131,5 +135,50 @@ function search( data ) {
         .then( data =>
             showProducts( data )
         );
+}
+
+function getLocations () {
+    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard" )
+        .then( response =>
+            response.text()
+        )
+        .then( data => {
+            showLocations( data );
+        } );
+}
+
+function showLocations( data ) {
+    //assign the email address
+    var content = "";
+    var phone = "";
+    var address = "";
+    var email = data.match( /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi ).join( '\n' );
+
+    const strs = data.split('\n');
+
+    //exact the phone number and address
+    for( var i = 0; i < strs.length; i++ ) {
+        if( strs[ i ].match( "VOICE" ) ) {
+            phone = strs[ i ].split(":")[ 1 ];
+        }
+
+        if( strs[i].match("DR;WORK;PREF:;;" ) ) {
+            address = strs[ i ].split(";;")[ 1 ];
+        }
+    }
+
+    //display the information of locations
+    content = "<p>Address:"+ address + " </p>"
+            + "Email:" + "<a id=\"email\" href=\"mailto:" + email + "\">"+ email +"</a>\n"
+            + "Tel:" + "<a id= \"phone\" href=\"tel:" + phone + "\">"+ phone +"‬</a>"
+            + "<a href=\"http://redsox.uoa.auckland.ac.nz/ds/mecard.svg\" target=\"_blank\"><br>\n"
+            + "Add us to your address book.\n"
+            + "</a>";
+
+    document.getElementById( "footer" ).innerHTML = content;
+
+    console.log(address);
+    console.log(email);
+    console.log(phone);
 }
 
