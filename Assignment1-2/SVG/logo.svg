@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 420">
     <rect x="10" width="400" height="50"/>
     <g transform="translate(10,0)">
-        <circle cx="50" cy="195" r="120" fill="black" clip-path="url(#halfCircle)"/>
+        <circle cx="50" cy="195" r="120" fill="black" clip-path="url(#cutD)"/>
         <rect x="0" y="75" width="50" height="240" />
         <polygon points="75,100 120,210 30,210" fill="white" />
         <circle cx="75" cy="220" r="46" fill="white"/>
     </g>
 
     <g transform="translate(240,0)">
-        <circle cx="50" cy="195" r="120" fill="black" clip-path="url(#halfCircle)"/>
+        <circle cx="50" cy="195" r="120" fill="black" clip-path="url(#cutD)"/>
         <rect x="0" y="75" width="50" height="240" />
         <polygon points="75,100 120,210 30,210" fill="white" />
         <circle cx="75" cy="220" r="46" fill="white"/>
     </g>
     <rect x="10" y="350" width="400" height="50"/>
     <defs>
-        <clipPath id="halfCircle">
+        <clipPath id="cutD">
             <rect x="0" y="75" width="170" height="240" fill="none" stroke="red"/>
         </clipPath>
     </defs>
