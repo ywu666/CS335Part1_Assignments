@@ -1,4 +1,4 @@
-function getData() {
+function getMetrics() {
     fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/g", {
         headers: {
             'Accept': 'application/json'
@@ -9,11 +9,11 @@ function getData() {
         )
         .then( data => {
             console.log( data );
-            generateCircles( data );
+            generateGraph( data );
         } );
 }
 
-function generateCircles( data ) {
+function generateGraph( data ) {
     //Set up the variables
     let positions = [];
     const numOfVertices = data.length;
@@ -55,7 +55,7 @@ function generateCircles( data ) {
  * @param size the radius of a cycle
  * @returns {[]} the x and y positions of the points
  */
-function makePolygon(posX, posY, numSides, size) {
+function makePolygon( posX, posY, numSides, size ) {
     let points = [], point = {};
     for ( let i = 0; i < numSides; i++ ) {
         point = {
@@ -68,4 +68,4 @@ function makePolygon(posX, posY, numSides, size) {
 }
 
 //Call the functions
-getData();
+getMetrics();
