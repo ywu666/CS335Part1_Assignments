@@ -6,7 +6,6 @@
     <g transform="translate(205,0)" mask="url(#masked)">
         <rect x="10" y="75" width="200" height="240"/>
     </g>
-
     <rect x="10" y="340" width="380" height="40"/>
 
     <defs>
