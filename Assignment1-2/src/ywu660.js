@@ -15,10 +15,10 @@ function getData() {
 
 function generateCircles( data ) {
     //Set up the variables
-    const numOfVertices = data.length;
     let positions = [];
-    let circles = makePolygon(250,125, numOfVertices, 80 );
-    let innerCircles = makePolygon(250,125, numOfVertices, 60);
+    const numOfVertices = data.length;
+    let circles = makePolygon(250,125, numOfVertices, 100 );
+    let innerCircles = makePolygon( 250,125, numOfVertices, 80 );
     for( let i = 0; i < numOfVertices; i++ ) {
         //Create an inner cycle for lines to connected vertexes
         positions.push( innerCircles[ i ].x + "," + innerCircles[ i ].y );
@@ -42,8 +42,8 @@ function generateCircles( data ) {
         }
 
     }
-
     content += "</svg>";
+
     document.getElementById( "graph" ).innerHTML = content;
 }
 
