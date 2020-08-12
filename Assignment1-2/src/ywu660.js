@@ -8,7 +8,7 @@ function getMetrics() {
             response.json()
         )
         .then( data => {
-            console.log( data );
+            showMetrics( data );
             generateGraph( data );
         } );
 }
@@ -43,7 +43,6 @@ function generateGraph( data ) {
 
     }
     content += "</svg>";
-
     document.getElementById( "graph" ).innerHTML = content;
 }
 
@@ -65,6 +64,12 @@ function makePolygon( posX, posY, numSides, size ) {
         points.push( point );
     }
     return points;
+}
+
+function showMetrics( data ) {
+    let dataParam = JSON.stringify( data );
+    document.getElementById("metrics").innerHTML= "<p>"+ dataParam + "</p>"
+
 }
 
 //Call the functions
