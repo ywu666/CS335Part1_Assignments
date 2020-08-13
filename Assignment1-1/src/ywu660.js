@@ -24,11 +24,11 @@ function hideTaps() {
 }
 
 function getProducts() {
-    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",{
+    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",{
         headers: {
             'Accept': 'application/json'
         },
-    })
+    } )
         .then( response =>
             response.json()
         )
@@ -97,7 +97,7 @@ function submitComment() {
     const name = document.getElementById( "fname" ).value;
     const comment = document.getElementById( "message" ).value;
 
-    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + name, {
+    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + name, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -124,7 +124,7 @@ function showComment() {
 }
 
 function search( data ) {
-    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term=" + data, {
+    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term=" + data, {
         headers: {
             'Accept': 'application/json'
         },
@@ -138,7 +138,7 @@ function search( data ) {
 }
 
 function getLocations () {
-    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard" )
+    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard" )
         .then( response =>
             response.text()
         )
@@ -149,15 +149,13 @@ function getLocations () {
 
 function showLocations( data ) {
     //assign the email address
-    var content = "";
-    var phone = "";
-    var address = "";
-    var email = data.match( /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi ).join( '\n' );
+    let content = "", phone = "", address = "";
+    let email = data.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi).join('\n');
 
     const strs = data.split('\n');
 
     //exact the phone number and address
-    for( var i = 0; i < strs.length; i++ ) {
+    for( let i = 0; i < strs.length; i++ ) {
         if( strs[ i ].match( "VOICE" ) ) {
             phone = strs[ i ].split(":")[ 1 ];
         }
@@ -176,9 +174,5 @@ function showLocations( data ) {
             + "</a>";
 
     document.getElementById( "footer" ).innerHTML = content;
-
-    console.log(address);
-    console.log(email);
-    console.log(phone);
 }
 
