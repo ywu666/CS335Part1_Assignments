@@ -24,7 +24,7 @@ function hideTaps() {
 }
 
 function getProducts() {
-    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items",{
+    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items", {
         headers: {
             'Accept': 'application/json'
         },
@@ -62,7 +62,7 @@ function showProducts( products ) {
 }
 
 function getNews () {
-    fetch ("http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news",{
+    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news", {
         headers: {
             'Accept': 'application/json'
         },
