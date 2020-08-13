@@ -68,8 +68,7 @@ function makePolygon( posX, posY, numSides, size ) {
 
 function showMetrics( data ) {
     let dataParam = JSON.stringify( data );
-    document.getElementById("metrics").innerHTML= "<p>"+ dataParam + "</p>"
-
+    document.getElementById( "metrics" ).innerHTML= "<p>"+ dataParam + "</p>"
 }
 
 //Call the functions
