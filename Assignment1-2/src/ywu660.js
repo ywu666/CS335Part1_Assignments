@@ -13,14 +13,19 @@ function getMetrics() {
         } );
 }
 
+/**
+ * Draw a undirected graph by using the adjacency metrics.
+ * @param data
+ */
 function generateGraph( data ) {
     //Set up the variables
-    let positions = [];
     const numOfVertices = data.length;
     let circles = makePolygon( 250, 125, numOfVertices, 100 );
+
+    //Create an inner cycle for lines to connected vertexes
+    let positions = [];
     let innerCircles = makePolygon( 250, 125, numOfVertices, 80 );
     for( let i = 0; i < numOfVertices; i++ ) {
-        //Create an inner cycle for lines to connected vertexes
         positions.push( innerCircles[ i ].x + "," + innerCircles[ i ].y );
     }
 
@@ -66,6 +71,10 @@ function makePolygon( posX, posY, numSides, size ) {
     return points;
 }
 
+/**
+ * Show the adjacency metrics that getting from the API
+ * @param data
+ */
 function showMetrics( data ) {
     let dataParam = JSON.stringify( data );
     document.getElementById( "metrics" ).innerHTML= "<p>"+ dataParam + "</p>"
