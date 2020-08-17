@@ -20,17 +20,17 @@ function getMetrics() {
 function generateGraph( data ) {
     //Set up the variables
     const numOfVertices = data.length;
-    let circles = makePolygon( 250, 125, numOfVertices, 100 );
+    let circles = makePolygon( 250, 250, numOfVertices, 200 );
 
     //Create an inner cycle for lines to connected vertexes
     let positions = [];
-    let innerCircles = makePolygon( 250, 125, numOfVertices, 80 );
+    let innerCircles = makePolygon( 250, 250, numOfVertices, 180 );
     for( let i = 0; i < numOfVertices; i++ ) {
         positions.push( innerCircles[ i ].x + "," + innerCircles[ i ].y );
     }
 
     //Draw the n-side polygon with text circles
-    let content = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 250'>";
+    let content = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'>";
     for( let i = 0; i < circles.length; i++ ) {
         //Center the text in the circle
         content += "<circle cx='"+ circles[ i ].x +"' cy='"+ circles[ i ].y +"' fill='none' stroke='black' stroke-width='1px' r='20'/>" +

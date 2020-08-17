@@ -9,7 +9,7 @@ function showTap ( id ) {
         getNews();
     }
 
-    if(id === "locationTap") {
+    if( id === "locationTap") {
         getLocations();
     }
 
