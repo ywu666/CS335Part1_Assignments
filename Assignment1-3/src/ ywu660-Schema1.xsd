@@ -32,7 +32,7 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:element name="ArrayOfItems">
+    <xs:element name="ArrayOfItem">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Item" type="ItemType" minOccurs="0" maxOccurs="unbounded"/>
