@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CS335 Assignment1</title>
+    <link rel="stylesheet" href="ywu660.css">
+    <script defer="true" src="ywu660.js"></script>
+    <link rel="shortcut icon" type="image/png" href="https://www.cs.auckland.ac.nz/courses/compsci335s2c/lectures/mano/qz/MathLogo.svg">
+</head>
+<body>
+
+<!--- THIS IS THE AREA OF THE NAVIGATION BAR-->
+<div class="container">
+    <div id="navigationBar">
+        <a class="active" href="#home" onclick="showTap('main')"><span>&#127968;</span>Home</a>
+        <a href="#items" onclick="showTap('staffTap')"><span>&#128100;</span>Staff</a>
+        <img class="logo" src="https://www.cs.auckland.ac.nz/courses/compsci335s2c/lectures/mano/qz/MathLogo.svg" alt="Math Logo">
+    </div>
+
+    <!-- THIS IS THE AREA OF THE HOME PAGE-->
+    <div class="tap" id="main" style="display: block">
+        <h1>Department of Mathematics</h1>
+        <p>Our department is one of the most diverse within the University, with
+            our courses connecting a broad range of disciplines and faculties</p>
+        <div class="footer">©All right reserved ywu660</div>
+    </div>
+
+    <!-- THIS IS THE AREA OF THE STAFF PAGE-->
+    <div class="tap" id="staffTap">
+        <h1>Staff of Mathematics</h1>
+        <table id="showStaff"></table>
+    </div>
+</div>
+</body>
+</html>
