@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-    <path fill="none" stroke="black" stroke-width="20" stroke-linecap="round" d="M 220.71067811865476 229.28932188134524 A 100 100 0 1 0 79.28932188134526 229.28932188134524" />
-    <path fill="none" stroke="black" stroke-width="20" stroke-linecap="round" d="M 70 80 L 60 70" />
-    <path fill="none" stroke="black" stroke-width="20" stroke-linecap="round" d="M 230 80 L 240 70" />
-    <circle cx="150" cy="160" r="70" stroke="black" stroke-width="20" fill="none"/>
-    <circle cx="150" cy="160" r="10" stroke="black" stroke-width="20" fill="black"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 334">
+    <path fill="none" stroke="black" stroke-width="25" stroke-linecap="round" d="M 220.71067811865476 229.28932188134524 A 100 100 0 1 0 79.28932188134526 229.28932188134524" />
+    <path fill="none" stroke="black" stroke-width="25" stroke-linecap="round" d="M 70 80 L 60 70" />
+    <path fill="none" stroke="black" stroke-width="25" stroke-linecap="round" d="M 230 80 L 240 70" />
+    <circle cx="150" cy="160" r="70" stroke="black" stroke-width="25" fill="none"/>
+    <circle cx="150" cy="160" r="10" stroke="black" stroke-width="25" fill="black"/>
     <circle cx="155" cy="150" r="5" fill="white"/>
-    <rect x="140" y="60" width="20" height="25"/>
+    <rect x="137.5" y="60" width="25" height="25"/>
 </svg>
