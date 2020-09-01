@@ -53,13 +53,20 @@ async function showStaff( staff ) {
         }
     }
 
+    var url = "";
+    if (staff.imageId != undefined) {
+        url = "https://unidirectory.auckland.ac.nz/people/imageraw/" + staff.profileUrl[ 1 ] + "/" + staff.imageId + "/biggest";
+    } else {
+        url = "https://unidirectory.auckland.ac.nz/people/imageraw/no-person/0/biggest";
+    }
+
     //Construct the table with the information of the staff
     tableContent += "<td>"
-        + "<img src='https://unidirectory.auckland.ac.nz/people/imageraw/" + staff.profileUrl[ 1 ] + "/" + staff.imageId + "/biggest' alt='image'/>"
-        + "<h3>" + staff.names[ 0 ] + " JobTitle: " + staff.jobtitles[ 0 ] + "</h3>"
+        + "<img src='" + url + "' alt='image'/>"
+        + "<h3>Name:" + staff.names[ 0 ] + " JobTitle: " + staff.jobtitles[ 0 ] + "</h3>"
         + "Email: <a id='email' href='mailto: "+ staff.emailAddresses +" '>" + staff.emailAddresses + "</a>\n"
         + "Phone: <a id='phone' href='tel:" + phone + "'>" + phone + "</a>"
-        + "<address>Address: "+ address + " </address>"
+        + "Address:<address> "+ address + " </address>"
         + "</td>";
 
     count += 1;
