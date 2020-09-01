@@ -55,11 +55,11 @@ async function showStaff( staff ) {
 
     //Construct the table with the information of the staff
     tableContent += "<td>"
-        + "<img src='https://unidirectory.auckland.ac.nz/people/imageraw/" + staff.profileUrl[ 1 ] + "/" + staff.imageId + "/biggest'/>"
+        + "<img src='https://unidirectory.auckland.ac.nz/people/imageraw/" + staff.profileUrl[ 1 ] + "/" + staff.imageId + "/biggest' alt='image'/>"
         + "<h3>" + staff.names[ 0 ] + " JobTitle: " + staff.jobtitles[ 0 ] + "</h3>"
-        + "Email: <a id='email' href='mailto'>" + staff.emailAddresses + "</a>\n"
+        + "Email: <a id='email' href='mailto: "+ staff.emailAddresses +" '>" + staff.emailAddresses + "</a>\n"
         + "Phone: <a id='phone' href='tel:" + phone + "'>" + phone + "</a>"
-        + "<p>Address: "+ address + " </p>"
+        + "<address>Address: "+ address + " </address>"
         + "</td>";
 
     count += 1;
