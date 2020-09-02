@@ -1,10 +1,18 @@
 var tableContent = "";
 var count = 0;
+var courseContent = "";
+var countForCourse = 0;
+
+
 function showTap ( id ) {
     hideTaps();
 
     if ( id === "staffTap" ) {
         getStaff();
+    }
+
+    if ( id === "courseTap" ) {
+        getCourse();
     }
 
     document.getElementById( id ).style.display = "block";
@@ -29,6 +37,7 @@ function getStaff() {
             response.json()
         )
         .then( data => {
+            //console.log(data);
             data.list.forEach( staff => showStaff( staff ) );
         } );
 }
@@ -81,5 +90,51 @@ async function showStaff( staff ) {
     //Set the table in the tap
     document.getElementById("showStaff").innerHTML = tableContent;
 }
+
+function getCourse() {
+    fetch ( "https://api.test.auckland.ac.nz/service/courses/v2/courses?subject=MATHS&year=2020&size=500", {
+        headers: {
+            'Accept': 'application/json'
+        },
+    } )
+        .then( response =>
+            response.json()
+        )
+        .then( data => {
+            data.data.forEach( course => showCourse(course));
+        } );
+}
+
+function showCourse( course ) {
+    console.log(course);
+
+    var require, intro;
+    if(course.rqrmntDescr != undefined) {
+        require = course.rqrmntDescr;
+    } else {
+        require = "No requirements description for this course."
+    }
+
+    if(intro != undefined) {
+        intro = course.description;
+    } else {
+        intro = "Sorry, no introduction for this course currently.";
+    }
+
+    courseContent += "<td>"
+                 + "<h2>Title: " + course.titleLong + "</h2>"
+                 + "<h3>Id: "+ course.crseId +"&nbsp;&nbsp;Level: "+ course.level + "</h3>"
+                 + "<p><b>Introduction:&nbsp;</b>"+ intro +"</p>"
+                 + "<p>"+ require +"</p>"
+                 + "<p><b>Credit: </b>" + course.unitsAcadProg + " <b>Main Program: </b>" + course.mainProgram +"</p>"
+                 + "</td>"
+                 + "</tr>\n";
+
+    //Set the table in the tap
+    document.getElementById("showCourses").innerHTML = courseContent;
+}
+
+
+
 
 

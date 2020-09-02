@@ -13,8 +13,10 @@
 <!--- THIS IS THE AREA OF THE NAVIGATION BAR-->
 <div class="container">
     <div id="navigationBar">
-        <a class="active" href="#home" onclick="showTap('main')"><span>&#127968;</span>Home</a>
-        <a href="#items" onclick="showTap('staffTap')"><span>&#128100;</span>Staff</a>
+        <a class="active" href="#home" onclick="showTap('main')">Home</a>
+        <a href="#items" onclick="showTap('staffTap')">Staff</a>
+        <a href="#courses" onclick="showTap('courseTap')">Course</a>
+        <a href="#infographics" onclick="showTap('infographicsTap')">Infographics</a>
         <img class="logo" src="https://www.cs.auckland.ac.nz/courses/compsci335s2c/lectures/mano/qz/MathLogo.svg" alt="Math Logo">
     </div>
 
@@ -31,6 +33,20 @@
         <h1>Staff of Mathematics</h1>
         <table id="showStaff"></table>
     </div>
+
+    <!-- THIS IS THE AREA OF THE COURSE PAGE -->
+    <div class="tap" id="courseTap">
+        <h1>Course of Mathematics</h1>
+        <table id="showCourses"></table>
+    </div>
+
+    <!-- THIS IS THE AREA OF THE INFORGRAPHIC PAGE-->
+    <div class="tap" id="infographicsTap">
+        <h1>Infographics</h1>
+        <div class="footer">©All right reserved ywu660</div>
+    </div>
+
+
 </div>
 </body>
 </html>

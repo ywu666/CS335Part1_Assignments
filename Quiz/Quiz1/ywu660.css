@@ -23,7 +23,7 @@ p {
 }
 
 #navigationBar a {
-    padding: 35px;
+    padding: 17px;
     color: black;
     text-decoration: none;
     font-size: 17px;
@@ -83,6 +83,18 @@ table td {
     border-bottom: 1px solid #ddd;
     padding-bottom: 2%;
 }
+
+table td:hover {
+  background-color: navajowhite;
+}
+
+#showCourses {
+    text-align: left;
+}
+
+/*#showCourses h2:hover {*/
+/*    text-decoration: underline;*/
+/*}*/
 
 table img {
     display: inline-block;
