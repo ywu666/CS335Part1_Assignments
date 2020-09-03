@@ -67,7 +67,7 @@ async function showStaff( staff ) {
         }
     }
 
-    var imageUrl;
+    let imageUrl;
     if (staff.imageId != undefined) {
         imageUrl = "https://unidirectory.auckland.ac.nz/people/imageraw/" + staff.profileUrl[ 1 ] + "/" + staff.imageId + "/biggest";
     } else {
@@ -102,7 +102,7 @@ async function showStaff( staff ) {
  */
 
 //The functions that used to show the courses
-var courseContent = "";
+let courseContent = "";
 
 function getCourse() {
     fetch ( "https://api.test.auckland.ac.nz/service/courses/v2/courses?subject=MATHS&year=2020&size=500", {
@@ -150,6 +150,7 @@ function showCourse( course ) {
 }
 
 //The functions that use to show the timetable for a specific course
+let timeTable = "";
 function getTimeTable( catalogNbr ) {
     fetch ( "https://api.test.auckland.ac.nz/service/classes/v1/classes?year=2020&subject=MATHS&size=500&catalogNbr=" + catalogNbr , {
         headers: {
@@ -160,20 +161,24 @@ function getTimeTable( catalogNbr ) {
             response.json()
         )
         .then( data => {
-            var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
+            console.log(data);
+            timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
             if(data.data.length == 0) {
                 document.getElementById( "title" ).innerText = "Time Table of MATHS" + catalogNbr;
                 document.getElementById( "timeTable" ).innerText = "Sorry, no time table for this course."
             }
+
             data.data.forEach(time => showTimeTable( time, timeTable ));
             showModal();
+            timeTable = "";
         } );
 }
 
-function showTimeTable( time, timeTable ) {
+function showTimeTable( time ) {
     var meetings = time.meetingPatterns;
     if( meetings.length > 0) { // Initialise the time table.
         var day = meetings[0].daysOfWeek;
+
         if( day == "mon" ) {
             timeTable[0] += "Start:" + meetings[0].startTime + " End:" + meetings[0].endTime
                          + " Location:" + meetings[0].location + "<br>";
