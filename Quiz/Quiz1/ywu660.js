@@ -1,9 +1,14 @@
+//Variables that are used to quiz1
 var tableContent = "";
 var count = 0;
+
+//Variables that are used to quiz2
 var courseContent = "";
-var countForCourse = 0;
 var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
 
+/*
+The functions that related to the quiz 1
+ */
 function showTap ( id ) {
     hideTaps();
 
@@ -13,6 +18,10 @@ function showTap ( id ) {
 
     if ( id === "courseTap" ) {
         getCourse();
+    }
+
+    if (id === "infographicsTap") {
+        getMetrics();
     }
 
     document.getElementById( id ).style.display = "block";
@@ -91,6 +100,11 @@ async function showStaff( staff ) {
     document.getElementById("showStaff").innerHTML = tableContent;
 }
 
+/*
+ The functions below are  added for quiz 2
+ */
+
+//The functions that used to show the courses
 function getCourse() {
     fetch ( "https://api.test.auckland.ac.nz/service/courses/v2/courses?subject=MATHS&year=2020&size=500", {
         headers: {
@@ -134,6 +148,7 @@ function showCourse( course ) {
     document.getElementById("showCourses").innerHTML = courseContent;
 }
 
+//The functions that use to show the timetable for a specific course
 function getTimeTable( catalogNbr ) {
     fetch ( "https://api.test.auckland.ac.nz/service/classes/v1/classes?year=2020&subject=MATHS&size=500&catalogNbr=" + catalogNbr , {
         headers: {
@@ -175,6 +190,8 @@ function showTimeTable( time ) {
     document.getElementById( "timeTable" ).innerHTML = timeTable.join("<br>");
 }
 
+
+// The functions that toggle the modal
 function showModal() {
     console.log("call show model");
     // get the relationship graph of the file that user wants to share
@@ -203,13 +220,58 @@ window.onclick = function(event) {
     }
 }
 
+//The functions that related to the quiz2 Q2
+function getMetrics() {
+    fetch ( "https://cws.auckland.ac.nz/qz20/Quiz2020ChartService.svc/g", {
+        headers: {
+            'Accept': 'application/json'
+        },
+    } )
+        .then( response =>
+            response.json()
+        )
+        .then( data => {
+            showMetrics( data );
+            data.forEach( metric => generateGraph( metric ));
+        } );
+}
 
+let graph = "<svg viewBox='0 0 800 600' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+graph += "<symbol id='logo' width='80' height='80' viewBox='0 0 400 334'>" +
+    "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 236.60254037844388 250 A 100 100 0 1 0 63.39745962155612 250'/>" +
+    "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 79.28932188 129.2893219 L 59.28932188 109.2893219'/>" +
+    "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 220.7106781 129.2893219 L 240.7106781 109.2893219'/>" +
+    "<circle cx='150' cy='200' r='60' stroke='black' stroke-width='25' fill='none'/>" +
+    "<circle cx='150' cy='200' r='10' stroke='black' fill='black'/>" +
+    "<circle cx='152' cy='197' r='4' fill='white'/>" +
+    "<rect x='137.5' y='100' width='25' height='30'/>" +
+    "</symbol>";
 
+let x = 5, y = 5, j = 0;
+function generateGraph( metric ) {
+     let remainder = metric % 10;
+     let numOfLogo =  (metric - remainder) / 10;
+     console.log("Remainder: " + remainder + " NumOfLogo: " + numOfLogo);
 
+     //Repeat the complete logo
+    for( let i = 0; i < numOfLogo; i++ ) {
+        graph += "<use xlink:href='#logo' x='"+ x +"'  y='"+ y +"' style='width:10%'/>"
+        x += 70;
+    }
 
+    //Change to a new row
+    y += 70;
+    x = 5;
 
+    document.getElementById( "graph" ).innerHTML = graph + "</svg>";
+}
 
-
-
-
+/**
+ * Show the adjacency metrics that getting from the API
+ * @param data
+ */
+function showMetrics( data ) {
+    let dataParam = JSON.stringify( data );
+    document.getElementById( "metrics" ).innerHTML= "<p>"+ dataParam + "</p>"
+}
 
