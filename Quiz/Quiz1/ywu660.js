@@ -2,7 +2,7 @@ var tableContent = "";
 var count = 0;
 var courseContent = "";
 var countForCourse = 0;
-var timeTable = "";
+var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
 
 function showTap ( id ) {
     hideTaps();
@@ -106,10 +106,9 @@ function getCourse() {
 }
 
 function showCourse( course ) {
-    console.log(course);
-
-    var require, intro;
-    if(course.rqrmntDescr != undefined) {
+    //Replace the undefined with better word
+    let require, intro;
+    if (course.rqrmntDescr != undefined) {
         require = course.rqrmntDescr;
     } else {
         require = "No requirements description for this course."
@@ -121,6 +120,7 @@ function showCourse( course ) {
         intro = "Sorry, no introduction for this course currently.";
     }
 
+    //Construct the course table
     courseContent += "<td onclick='getTimeTable("+ course.catalogNbr +")'>"
                  + "<h2>" + course.titleLong + "</h2>"
                  + "<h3>Name: "+ course.acadOrg + course.catalogNbr +"&nbsp;&nbsp;Id: "+ course.crseId +"</h3>"
@@ -130,12 +130,11 @@ function showCourse( course ) {
                  + "</td>"
                  + "</tr>\n";
 
-    //Set the table in the tap
+    //Set the course table in the tap
     document.getElementById("showCourses").innerHTML = courseContent;
 }
 
 function getTimeTable( catalogNbr ) {
-    console.log( catalogNbr )
     fetch ( "https://api.test.auckland.ac.nz/service/classes/v1/classes?year=2020&subject=MATHS&size=500&catalogNbr=" + catalogNbr , {
         headers: {
             'Accept': 'application/json'
@@ -145,18 +144,66 @@ function getTimeTable( catalogNbr ) {
             response.json()
         )
         .then( data => {
-            //data.data.forEach(time => showTimeTable( time ));
+            console.log(data);
+            data.data.forEach(time => showTimeTable( time ));
+            showModal();
         } );
 }
 
-// function showTimeTable( time ) {
-//
-//     if(time.meetingPatterns.length > 0) {
-//         timeTable += time.meetingPatterns;
-//     }
-//
-//
-// }
+function showTimeTable( time ) {
+    var meetings = time.meetingPatterns;
+    if( meetings.length > 0) { // Initialise the time table.
+        var day = meetings[0].daysOfWeek;
+        if( day == "mon" ) {
+            timeTable[0] += "Start:" + meetings[0].startTime + " End:" + meetings[0].endTime
+                         + " Location:" + meetings[0].location + "<br>";
+        } else if( day == "tue" ) {
+            timeTable[1] += "Start:" + meetings[0].startTime + " End:" + meetings[0].endTime
+                         + " Location:" + meetings[0].location + "<br>";
+        } else if ( day == "wed" ) {
+            timeTable[2] += "Start:" + meetings[0].startTime + " End:" + meetings[0].endTime
+                         + " Location:" + meetings[0].location + "<br>";
+        } else if ( day =="thu" ) {
+            timeTable[3] += "Start:" + meetings[0].startTime + " End:" + meetings[0].endTime
+                         + " Location:" + meetings[0].location + "<br>";
+        } else if ( day == "fri"){
+            timeTable[4] += "Start:" + meetings[0].startTime + " End:" + meetings[0].endTime
+                         + " Location:" + meetings[0].location + "<br>";
+        }
+    }
+    document.getElementById( "title" ).innerText = "Time Table of " + time.acadOrg + time.catalogNbr;
+    document.getElementById( "timeTable" ).innerHTML = timeTable.join("<br>");
+}
+
+function showModal() {
+    console.log("call show model");
+    // get the relationship graph of the file that user wants to share
+    const modal = document.getElementById( "modal" );
+
+    if( modal.style.display === "none" ) {
+        // if the model is already displayed, hide the graph
+        modal.style.display = "block";
+
+    } else {
+        // if the model is hidden, show it
+        modal.style.display = "none";
+
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById( "modal" );
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById( "modal" );
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+
+
 
 
 
