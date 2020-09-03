@@ -1,10 +1,5 @@
-//Variables that are used to quiz1
 var tableContent = "";
 var count = 0;
-
-//Variables that are used to quiz2
-var courseContent = "";
-//var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
 
 /*
 The functions that related to the quiz 1
@@ -46,8 +41,9 @@ function getStaff() {
             response.json()
         )
         .then( data => {
-            //console.log(data);
-            data.list.forEach( staff => showStaff( staff ) );
+            //Variables that are used to quiz1
+            data.list.forEach( staff => showStaff(staff) );
+            tableContent = "";
         } );
 }
 
@@ -71,7 +67,7 @@ async function showStaff( staff ) {
         }
     }
 
-    var imageUrl = "";
+    var imageUrl;
     if (staff.imageId != undefined) {
         imageUrl = "https://unidirectory.auckland.ac.nz/people/imageraw/" + staff.profileUrl[ 1 ] + "/" + staff.imageId + "/biggest";
     } else {
@@ -100,11 +96,14 @@ async function showStaff( staff ) {
     document.getElementById("showStaff").innerHTML = tableContent;
 }
 
+
 /*
  The functions below are  added for quiz 2
  */
 
 //The functions that used to show the courses
+var courseContent = "";
+
 function getCourse() {
     fetch ( "https://api.test.auckland.ac.nz/service/courses/v2/courses?subject=MATHS&year=2020&size=500", {
         headers: {
@@ -115,7 +114,9 @@ function getCourse() {
             response.json()
         )
         .then( data => {
-            data.data.forEach( course => showCourse(course));
+            //Variables that are used to quiz2
+            data.data.forEach( course => showCourse( course ));
+            courseContent = "";
         } );
 }
 
@@ -159,11 +160,13 @@ function getTimeTable( catalogNbr ) {
             response.json()
         )
         .then( data => {
-            console.log(data);
             var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
+            if(data.data.length == 0) {
+                document.getElementById( "title" ).innerText = "Time Table of MATHS" + catalogNbr;
+                document.getElementById( "timeTable" ).innerText = "Sorry, no time table for this course."
+            }
             data.data.forEach(time => showTimeTable( time, timeTable ));
             showModal();
-
         } );
 }
 
@@ -195,7 +198,6 @@ function showTimeTable( time, timeTable ) {
 
 // The functions that toggle the modal
 function showModal() {
-    console.log("call show model");
     // get the relationship graph of the file that user wants to share
     const modal = document.getElementById( "modal" );
 
@@ -206,7 +208,6 @@ function showModal() {
     } else {
         // if the model is hidden, show it
         modal.style.display = "none";
-
     }
 }
 
@@ -223,6 +224,11 @@ window.onclick = function(event) {
 }
 
 //The functions that related to the quiz2 Q2
+
+//Add the symbol
+let graph = "";
+let x = 5, y = 5, j = 0;
+
 function getMetrics() {
     fetch ( "https://cws.auckland.ac.nz/qz20/Quiz2020ChartService.svc/g", {
         headers: {
@@ -234,25 +240,24 @@ function getMetrics() {
         )
         .then( data => {
             showMetrics( data );
-            data.forEach( metric => generateGraph( metric ) );
+            graph = "<svg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>" +
+                "<symbol id='logo' width='60' height='60' viewBox='0 0 400 400'>" +
+                "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 236.60254037844388 250 A 100 100 0 1 0 63.39745962155612 250'/>" +
+                "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 79.28932188 129.2893219 L 59.28932188 109.2893219'/>" +
+                "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 220.7106781 129.2893219 L 240.7106781 109.2893219'/>" +
+                "<circle cx='150' cy='200' r='60' stroke='black' stroke-width='25' fill='none'/>" +
+                "<circle cx='150' cy='200' r='10' stroke='black' fill='black'/>" +
+                "<circle cx='152' cy='197' r='4' fill='white'/>" +
+                "<rect x='137.5' y='100' width='25' height='30'/>" +
+                "</symbol>";
+
+            data.forEach( metric => generateGraph( metric ));
+            x = 5, y = 5, j = 0;
             graph = "";
         } );
 }
 
-//Add the symbol
-let graph = "<svg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
-graph += "<symbol id='logo' width='60' height='60' viewBox='0 0 400 400'>" +
-    "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 236.60254037844388 250 A 100 100 0 1 0 63.39745962155612 250'/>" +
-    "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 79.28932188 129.2893219 L 59.28932188 109.2893219'/>" +
-    "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 220.7106781 129.2893219 L 240.7106781 109.2893219'/>" +
-    "<circle cx='150' cy='200' r='60' stroke='black' stroke-width='25' fill='none'/>" +
-    "<circle cx='150' cy='200' r='10' stroke='black' fill='black'/>" +
-    "<circle cx='152' cy='197' r='4' fill='white'/>" +
-    "<rect x='137.5' y='100' width='25' height='30'/>" +
-    "</symbol>";
-
-let x = 5, y = 5, j = 0;
-function generateGraph( metric ) {
+function generateGraph( metric) {
      let remainder = metric % 10 ;
      let numOfLogo = ( metric - remainder ) / 10;
 
@@ -281,6 +286,7 @@ function generateGraph( metric ) {
 
     //Set the graph
     document.getElementById( "graph" ).innerHTML = graph + "</svg>";
+
 }
 
 
