@@ -2,7 +2,7 @@ var tableContent = "";
 var count = 0;
 var courseContent = "";
 var countForCourse = 0;
-
+var timeTable = "";
 
 function showTap ( id ) {
     hideTaps();
@@ -121,18 +121,46 @@ function showCourse( course ) {
         intro = "Sorry, no introduction for this course currently.";
     }
 
-    courseContent += "<td>"
-                 + "<h2>Title: " + course.titleLong + "</h2>"
-                 + "<h3>Id: "+ course.crseId +"&nbsp;&nbsp;Level: "+ course.level + "</h3>"
+    courseContent += "<td onclick='getTimeTable("+ course.catalogNbr +")'>"
+                 + "<h2>" + course.titleLong + "</h2>"
+                 + "<h3>Name: "+ course.acadOrg + course.catalogNbr +"&nbsp;&nbsp;Id: "+ course.crseId +"</h3>"
+                 + "<p><b>Credit: </b>" + course.unitsAcadProg + " <b>Main Program: </b>" + course.mainProgram +"</p>"
                  + "<p><b>Introduction:&nbsp;</b>"+ intro +"</p>"
                  + "<p>"+ require +"</p>"
-                 + "<p><b>Credit: </b>" + course.unitsAcadProg + " <b>Main Program: </b>" + course.mainProgram +"</p>"
                  + "</td>"
                  + "</tr>\n";
 
     //Set the table in the tap
     document.getElementById("showCourses").innerHTML = courseContent;
 }
+
+function getTimeTable( catalogNbr ) {
+    console.log( catalogNbr )
+    fetch ( "https://api.test.auckland.ac.nz/service/classes/v1/classes?year=2020&subject=MATHS&size=500&catalogNbr=" + catalogNbr , {
+        headers: {
+            'Accept': 'application/json'
+        },
+    } )
+        .then( response =>
+            response.json()
+        )
+        .then( data => {
+            //data.data.forEach(time => showTimeTable( time ));
+        } );
+}
+
+// function showTimeTable( time ) {
+//
+//     if(time.meetingPatterns.length > 0) {
+//         timeTable += time.meetingPatterns;
+//     }
+//
+//
+// }
+
+
+
+
 
 
 

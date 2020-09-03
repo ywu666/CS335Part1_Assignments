@@ -84,7 +84,7 @@ table td {
     padding-bottom: 2%;
 }
 
-table td:hover {
+#showCourses td:hover {
   background-color: navajowhite;
 }
 
