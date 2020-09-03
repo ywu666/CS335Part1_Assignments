@@ -4,7 +4,7 @@ var count = 0;
 
 //Variables that are used to quiz2
 var courseContent = "";
-var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
+//var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
 
 /*
 The functions that related to the quiz 1
@@ -160,12 +160,14 @@ function getTimeTable( catalogNbr ) {
         )
         .then( data => {
             console.log(data);
-            data.data.forEach(time => showTimeTable( time ));
+            var timeTable = ["<b>Monday:</b><br>", "<b>Tuesday:</b><br>", "<b>Wednesday:</b><br>", "<b>Thursday:</b><br>", "<b>Friday:</b><br>"];
+            data.data.forEach(time => showTimeTable( time, timeTable ));
             showModal();
+
         } );
 }
 
-function showTimeTable( time ) {
+function showTimeTable( time, timeTable ) {
     var meetings = time.meetingPatterns;
     if( meetings.length > 0) { // Initialise the time table.
         var day = meetings[0].daysOfWeek;
@@ -232,12 +234,14 @@ function getMetrics() {
         )
         .then( data => {
             showMetrics( data );
-            data.forEach( metric => generateGraph( metric ));
+            data.forEach( metric => generateGraph( metric ) );
+            graph = "";
         } );
 }
 
-let graph = "<svg viewBox='0 0 800 600' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
-graph += "<symbol id='logo' width='80' height='80' viewBox='0 0 400 334'>" +
+//Add the symbol
+let graph = "<svg viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>";
+graph += "<symbol id='logo' width='60' height='60' viewBox='0 0 400 400'>" +
     "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 236.60254037844388 250 A 100 100 0 1 0 63.39745962155612 250'/>" +
     "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 79.28932188 129.2893219 L 59.28932188 109.2893219'/>" +
     "<path fill='none' stroke='black' stroke-width='25' stroke-linecap='round' d='M 220.7106781 129.2893219 L 240.7106781 109.2893219'/>" +
@@ -249,22 +253,36 @@ graph += "<symbol id='logo' width='80' height='80' viewBox='0 0 400 334'>" +
 
 let x = 5, y = 5, j = 0;
 function generateGraph( metric ) {
-     let remainder = metric % 10;
-     let numOfLogo =  (metric - remainder) / 10;
-     console.log("Remainder: " + remainder + " NumOfLogo: " + numOfLogo);
+     let remainder = metric % 10 ;
+     let numOfLogo = ( metric - remainder ) / 10;
 
      //Repeat the complete logo
-    for( let i = 0; i < numOfLogo; i++ ) {
-        graph += "<use xlink:href='#logo' x='"+ x +"'  y='"+ y +"' style='width:10%'/>"
-        x += 70;
-    }
+     for( let i = 0; i < numOfLogo; i++ ) {
+        graph += "<use xlink:href='#logo' x='"+ x +"'  y='"+ y +"'/>"
+        x += 50;
+     }
 
+     //Construct the remainder
+     if (remainder > 0) {
+        //Construct the remainder
+         remainder = remainder * 3.5;
+
+         //Add clip path
+         graph += "<clipPath id='myClip"+ j +"'>" +
+             "<rect <rect x='5' y='10' width= '"+ remainder +"' height='40'/>" +
+             "</clipPath>";
+
+        graph += "<use clip-path='url(#myClip"+ j + ")' xlink:href='#logo' x='"+ x +"'  y='"+ y +"'/>"
+     }
     //Change to a new row
-    y += 70;
+    y += 50;
     x = 5;
+    j++;
 
+    //Set the graph
     document.getElementById( "graph" ).innerHTML = graph + "</svg>";
 }
+
 
 /**
  * Show the adjacency metrics that getting from the API
@@ -272,6 +290,5 @@ function generateGraph( metric ) {
  */
 function showMetrics( data ) {
     let dataParam = JSON.stringify( data );
-    document.getElementById( "metrics" ).innerHTML= "<p>"+ dataParam + "</p>"
+    document.getElementById( "metrics" ).innerHTML= "<h3>Attendance: "+ dataParam + "</h3>"
 }
-

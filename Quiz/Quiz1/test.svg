@@ -1,6 +1,6 @@
 <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Our symbol in its own coordinate system -->
-    <symbol id="myDot" width="50" height ="50" viewBox="0 0 400 334">
+    <symbol id="myDot" width="60" height ="60" viewBox="0 0 400 400">
         <path fill="none" stroke="black" stroke-width="25" stroke-linecap="round" d="M 236.60254037844388 250 A 100 100 0 1 0 63.39745962155612 250" />
         <path fill="none" stroke="black" stroke-width="25" stroke-linecap="round" d="M 79.28932188 129.2893219 L 59.28932188 109.2893219" />
         <path fill="none" stroke="black" stroke-width="25" stroke-linecap="round" d="M 220.7106781 129.2893219 L 240.7106781 109.2893219" />
@@ -9,11 +9,10 @@
         <circle cx="152" cy="197" r="4" fill="white"/>
         <rect x="137.5" y="100" width="25" height="30"/>
     </symbol>
-
-    <!-- A grid to materialize our symbol positioning -->
-    <path d="M0,10 h80 M10,0 v20 M25,0 v20 M40,0 v20 M55,0 v20 M70,0 v20" fill="none" stroke="pink" />
-
-    <!-- All instances of our symbol -->
-    <use xlink:href="#myDot" x="5"  y="5" style="width:10% height:10%"/>
-    <use xlink:href="#myDot" x="300"  y="5" style=""/>
+    <clipPath id="myClip" >
+        <rect x="5" y="10" width="17.5" height="40"/>
+    </clipPath>
+    <use xlink:href="#myDot" x="5" y="5"/>
+    <use clip-path="url(#myClip)" xlink:href="#myDot" x="50" y="5"/>
+    <use clip-path="url(#myClip)" xlink:href="#myDot" x="100"  y="5"/>
 </svg>
