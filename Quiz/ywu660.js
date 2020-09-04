@@ -49,7 +49,7 @@ function getStaff() {
 
 async function showStaff( staff ) {
     //Get the vcard from the remote API
-    var url = "https://unidirectory.auckland.ac.nz/people/vcard/" + staff.profileUrl[1];
+    let url = "https://unidirectory.auckland.ac.nz/people/vcard/" + staff.profileUrl[1];
     let response = await fetch(" https://cws.auckland.ac.nz/cors/CorsProxyService.svc/proxy?url=" + url);
     let data = await response.text();
 
@@ -103,7 +103,6 @@ async function showStaff( staff ) {
 
 //The functions that used to show the courses
 let courseContent = "";
-
 function getCourse() {
     fetch ( "https://api.test.auckland.ac.nz/service/courses/v2/courses?subject=MATHS&year=2020&size=500", {
         headers: {
@@ -233,7 +232,6 @@ window.onclick = function(event) {
 //Add the symbol
 let graph = "";
 let x = 5, y = 5, j = 0;
-
 function getMetrics() {
     fetch ( "https://cws.auckland.ac.nz/qz20/Quiz2020ChartService.svc/g", {
         headers: {
@@ -262,6 +260,10 @@ function getMetrics() {
         } );
 }
 
+/**
+ * Dynamic generate the graphs based on the metrics
+ * @param metric
+ */
 function generateGraph( metric) {
      let remainder = metric % 10 ;
      let numOfLogo = ( metric - remainder ) / 10;
@@ -284,6 +286,7 @@ function generateGraph( metric) {
 
         graph += "<use clip-path='url(#myClip"+ j + ")' xlink:href='#logo' x='"+ x +"'  y='"+ y +"'/>"
      }
+
     //Change to a new row
     y += 50;
     x = 5;
@@ -291,12 +294,11 @@ function generateGraph( metric) {
 
     //Set the graph
     document.getElementById( "graph" ).innerHTML = graph + "</svg>";
-
 }
 
 
 /**
- * Show the adjacency metrics that getting from the API
+ * Show the metrics that getting from the API
  * @param data
  */
 function showMetrics( data ) {
