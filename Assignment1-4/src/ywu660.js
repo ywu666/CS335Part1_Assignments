@@ -224,33 +224,34 @@ function singUp() {
 }
 
 function buyNow( item ) {
-    showModal();
-}
-function showModal() {
-    // get the relationship graph of the file that user wants to share
-    const modal = document.getElementById( "modal" );
-    if( modal.style.display === "none" ) {
-        // if the model is already displayed, hide the graph
-        modal.style.display = "block";
-
-    } else {
-        // if the model is hidden, show it
-        modal.style.display = "none";
-    }
+    window.open("http://redsox.uoa.auckland.ac.nz/dsa/Service.svc/buy?id=" + item.value, "_blank");
 }
 
-
-function closeModal() {
-    const modal = document.getElementById( "modal" );
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    const modal = document.getElementById( "modal" );
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
+// function showModal() {
+//     // get the relationship graph of the file that user wants to share
+//     const modal = document.getElementById( "modal" );
+//     if( modal.style.display === "none" ) {
+//         // if the model is already displayed, hide the graph
+//         modal.style.display = "block";
+//
+//     } else {
+//         // if the model is hidden, show it
+//         modal.style.display = "none";
+//     }
+// }
+//
+//
+// function closeModal() {
+//     const modal = document.getElementById( "modal" );
+//     modal.style.display = "none";
+// }
+//
+// window.onclick = function(event) {
+//     const modal = document.getElementById( "modal" );
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
 
 
 
