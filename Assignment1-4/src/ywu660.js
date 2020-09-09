@@ -13,6 +13,10 @@ function showTap ( id ) {
         getLocations();
     }
 
+    if(id === "signUpTap") {
+
+    }
+
     document.getElementById( id ).style.display = "block";
 }
 
@@ -20,16 +24,6 @@ function hideTaps() {
     const list = document.getElementsByClassName( "tap" );
     for( let i = 0; i < list.length; i++ ) {
         list[ i ].style.display = "none";
-    }
-}
-
-function changeTap( id ) {
-    if( id === "login") {
-        document.getElementById("signup").style.display = "none";
-        document.getElementById( id ).style.display = "block";
-    } else {
-        document.getElementById( "login" ).style.display = "none";
-        document.getElementById( "signup" ).style.display = "block";
     }
 }
 
@@ -58,7 +52,7 @@ function showProducts( products ) {
             + "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
             + "<h3>" + record.Title + "</h3>"
             + "<figcaption>"+ record.Origin + " Price: $" + record.Price + " " + record.Type +"</figcaption>"
-            + "<button class='buyBtn' value='" + record.ItemID + "'>Buy Now</button>"
+            + "<button onclick='buyNow(this)' class='buyBtn' value='" + record.ItemId + "'>Buy Now</button>"
             + "</td>";
         count += 1;
 
@@ -118,7 +112,7 @@ function submitComment() {
             response.onload = showComment();
             response.status;
         } )
-        .then( data => {
+        . then( data => {
             console.log( data )
         } );
 }
@@ -176,20 +170,65 @@ function showLocations( data ) {
 
     //display the information of locations
     content = "<p>Address:"+ address + " </p>"
-            + "Email:" + "<a id=\"email\" href=\"mailto:" + email + "\">"+ email +"</a>\n"
-            + "Tel:" + "<a id= \"phone\" href=\"tel:" + phone + "\">"+ phone +"‬</a>"
-            + "<a href=\"http://redsox.uoa.auckland.ac.nz/ds/mecard.svg\" target=\"_blank\"><br>\n"
+            + "Email:" + "<a id='email' href='mailto:" + email + "'>"+ email +"</a>\n"
+            + "Tel:" + "<a id='phone' href='tel:" + phone + "'>"+ phone +"‬</a>"
+            + "<a href='http://redsox.uoa.auckland.ac.nz/ds/mecard.svg' target='_blank'><br>\n"
             + "Add us to your address book.\n"
             + "</a>";
 
     document.getElementById( "footer" ).innerHTML = content;
 }
 
-// The functions that toggle the modal
+//The functions that related to the login/ register
+function login() {
+    const xhr = new XMLHttpRequest();
+    const uri = "http://redsox.uoa.auckland.ac.nz/CSS/CSService.svc/id";
+    xhr.open("GET", uri, true, user, password); xhr.withCredentials = true;
+    xhr.onload = () => {
+        const version_d = document.getElementById("show_result");
+        version_d.innerHTML = xhr.responseText;
+    }
+    xhr.send(null);
+}
+
+function singUp() {
+    var username = document.getElementById("registerUsername").value;
+    var address = document.getElementById("registerAddress").value;
+    var password = document.getElementById("registerPassword").value;
+
+    var uri = "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/register";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", uri, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+
+    xhr.send( JSON.stringify({
+            Address : address,
+            Name : username,
+            Password : password
+        } )
+    );
+
+    xhr.onload = function() {
+        document.getElementById("registerUsername").value = "";
+        document.getElementById("registerAddress").value = "";
+        document.getElementById("registerPassword").value = "";
+
+        if (xhr.responseText.includes("registered")) {
+            document.getElementById("successMsg").classList.add("success");
+        } else {
+            document.getElementById("successMsg").classList.add("failure");
+        }
+        document.getElementById("successMsg").innerHTML = xhr.responseText;
+    }
+}
+
+function buyNow( item ) {
+    showModal();
+}
 function showModal() {
     // get the relationship graph of the file that user wants to share
     const modal = document.getElementById( "modal" );
-
     if( modal.style.display === "none" ) {
         // if the model is already displayed, hide the graph
         modal.style.display = "block";
@@ -199,6 +238,7 @@ function showModal() {
         modal.style.display = "none";
     }
 }
+
 
 function closeModal() {
     const modal = document.getElementById( "modal" );
@@ -211,4 +251,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+
 

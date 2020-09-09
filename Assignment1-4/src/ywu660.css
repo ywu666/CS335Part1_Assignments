@@ -79,6 +79,10 @@ iframe {
     color: #666666;
 }
 
+#signUpTap input {
+    margin-bottom:1%;
+}
+
 button {
     padding: 12px;
     border: none;
@@ -143,11 +147,10 @@ table figcaption {
     color: blue;
 }
 
-/* The css of time table model */
 .modal {
     position: fixed;
     z-index: 1;
-    padding-top: 140px;
+    padding-top: 250px;
     left: 0;
     top: 0;
     width: 100%;
@@ -163,56 +166,8 @@ table figcaption {
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 35%;
-    text-align: center;
+    width: 50%;
 }
-
-.tab-group {
-    list-style-type: none;
-    margin: 20px auto;
-    padding: 0;
-    overflow: hidden;
-    background-color: antiquewhite;
-}
-
-.tab-group li {
-    float: left;
-}
-
-.tab-group li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.tab-group li a:hover:not(.active) {
-    background-color: navajowhite;
-}
-
-.req {
-    pointer-events: none;
-    font-size:22px;
-    margin:2px;
-    color: red;
-}
-/* Full-width input fields */
-.tab-content input {
-    padding: 10px;
-    margin: 5px 0 10px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-}
-
-/* Add a background color when the inputs get focus */
-.tab-content input:focus {
-    background-color: #ddd;
-    outline: none;
-}
-
 
 /* The Close Button */
 .close {
@@ -228,6 +183,38 @@ table figcaption {
     text-decoration: none;
     cursor: pointer;
 }
+
+.req {
+    pointer-events: none;
+    font-size:22px;
+    margin:2px;
+    color: red;
+}
+
+/* Full-width input fields */
+.tab-content input {
+    padding: 10px;
+    margin: 5px 0 10px 0;
+    /*display: inline-block;*/
+    border: none;
+    background: #f1f1f1;
+
+}
+
+/* Add a background color when the inputs get focus */
+.tab-content input:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.success {
+    color: forestgreen;
+}
+
+.failure {
+    color: red;
+}
+
 
 @media only screen and (max-width:620px) {
     /* For mobile phones: */

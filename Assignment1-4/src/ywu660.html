@@ -19,7 +19,7 @@
         <a href="#locations" onclick="showTap('locationTap')"><span>&#128204;</span>Location</a>
         <a href="#news" onclick="showTap('newsTap')"><span>&#128240;</span>News</a>
         <a href="#comment" onclick="showTap('guestBookTap')"><span>&#128214;</span>Guest Book</a>
-        <a href="#loginRegister" onclick="showModal()"><span>&#128100;</span>Log in/Register</a>
+        <a href="#signUp" onclick="showTap('signUpTap')"><span>&#128100;</span>Register</a>
     </div>
     <!---MAIN PAGE -->
 
@@ -41,6 +41,14 @@
             <button onclick="search( document.getElementById( 'searchTerm' ).value )">Search</button>
         </div>
         <table id="showProducts"></table>
+
+        <!-- The Modal -->
+        <div id="modal" class="modal" style="display: none">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <p id="itemMessage">Sorry, no time table for this course.</p>
+            </div>
+        </div>
     </div>
 
     <!-- THIS IS THE AREA OF THE LOCATION PAGE -->
@@ -74,74 +82,28 @@
         <iframe id="recentEntries" src="http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments"></iframe>
     </div>
 
-    <!-- THIS IS THE AREA OF THE LOGIN PAGE -->
-    <!-- The Modal -->
-    <div id="modal" class="modal" style="display: none">
-        <!-- Modal graph -->
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-
-            <ul class="tab-group">
-                <li class="tab active"><a href="#signup" onclick="changeTap('signup')">Sign Up</a></li>
-                <li class="tab"><a href="#login" onclick="changeTap('login')">Log In</a></li>
-            </ul>
-                <div class="tab-content">
-                    <div id="signup">
-                        <h1>Sign Up for Free</h1>
-                        <form action="/" method="post">
-                            <div class="top-row">
-                                <div class="field-wrap">
-                                    <label>
-                                        First Name<span class="req">*</span>
-                                    </label>
-                                    <input type="text" required autocomplete="off" />
-                                </div>
-                                <div class="field-wrap">
-                                    <label>
-                                        Last Name<span class="req">*</span>
-                                    </label>
-                                    <input type="text"required autocomplete="off"/>
-                                </div>
-                            </div>
-                            <div class="field-wrap">
-                                <label>
-                                    User Name<span class="req">*</span>
-                                </label>
-                                <input type="text"required autocomplete="off"/>
-                            </div>
-                            <div class="field-wrap">
-                                <label>
-                                    Set A Password<span class="req">*</span>
-                                </label>
-                                <input type="password"required autocomplete="off"/>
-                            </div>
-                            <button type="submit" class="button button-block"/>Get Started</button>
-                        </form>
-                    </div>
-
-                    <div id="login" style="display: none">
-                        <h1>Welcome Back!</h1>
-                        <form action="/" method="post">
-                            <div class="field-wrap">
-                                <label>
-                                    User Name<span class="req">*</span>
-                                </label>
-                                <input type="text"required autocomplete="off"/>
-                            </div>
-                            <div class="field-wrap">
-                                <label>
-                                    Password<span class="req">*</span>
-                                </label>
-                                <input type="password"required autocomplete="off"/>
-                            </div>
-                            <p class="forgot"><a href="#">Forgot Password?</a></p>
-                            <button class="button button-block"/>Log In</button>
-                        </form>
-                    </div>
-                </div><!-- tab-content -->
-            </div> <!-- /form -->
-        </div><!-- /model content-->
+    <div class="tap" id="signUpTap">
+        <h1>Sign Up for Free</h1>
+        <div class="form">
+            <div class="field-wrap">
+                <label>User Name<span class="req">*</span></label>
+                <input id="registerUsername" type="text" required autocomplete="off" />
+            </div>
+            <div class="field-wrap">
+                <label>Address<span class="req">*</span></label>
+                <input id="registerAddress" type="text"required autocomplete="off"/>
+            </div>
+            <div class="field-wrap">
+                <label>
+                    Set A Password<span class="req">*</span>
+                </label>
+                <input id="registerPassword" type="password" required autocomplete="off"/>
+            </div>
+            <input type="submit" value="Get Started" onclick="singUp()" id="regSubmit" onsubmit="showSuccess()">
+            <div id="successMsg"></div>
+        </div>
     </div>
+
 </div>
 </body>
 </html>
