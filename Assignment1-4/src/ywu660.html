@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen-testing</title>
+    <link rel="stylesheet" href="ywu660.css">
+    <script defer="true" src="ywu660.js"></script>
+    <link rel="shortcut icon" type="image/png" href="http://redsox.uoa.auckland.ac.nz/ds/logo.svg">
+</head>
+<body>
+
+<!--- THIS IS THE AREA OF THE NAVIGATION BAR-->
+<div class="container">
+    <div id="navigationBar">
+        <img class="logo" src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg" alt="Dunedin Dairy">
+        <a class="active" href="#home" onclick="showTap('main')"><span>&#127968;</span>Home</a>
+        <a href="#items" onclick="showTap('productsTap')"><span>&#128722;</span>Products</a>
+        <a href="#locations" onclick="showTap('locationTap')"><span>&#128204;</span>Location</a>
+        <a href="#news" onclick="showTap('newsTap')"><span>&#128240;</span>News</a>
+        <a href="#comment" onclick="showTap('guestBookTap')"><span>&#128214;</span>Guest Book</a>
+        <a href="#loginRegister" onclick="showModal()"><span>&#128100;</span>Log in/Register</a>
+    </div>
+    <!---MAIN PAGE -->
+
+    <!-- THIS IS THE AREA OF THE HOME PAGE-->
+    <div class="tap" id="main" style="display: block">
+        <h1>Dunedin Dairy</h1>
+        <p> Welcome to the Dunedin Dairy. The Duendin Dairy is a leading online dairy shop in New Zealand.<br>
+            We take pride in sourcing with the best dairy products from within the New Zealand and abroad.<br>
+            Our shop is open 24 hours 7 days, and we strive to deliver your purchases promptly.</p>
+        <img class="cow" src="https://d1b10bmlvqabco.cloudfront.net/paste/iznj0o22wk8g5/601d64b09061a8d6df73e82aa9df56031500074ae220a2b5a2a9d1b2ae8a786c/image.png" alt="image.png">
+        <div class="footer" >©All right reserved ywu660</div>
+    </div>
+
+    <!-- THIS IS THE AREA OF THE PRODUCT PAGE-->
+    <div class="tap" id="productsTap">
+        <h1>Products</h1>
+        <div id="search">
+            <input oninput="search( this.value )" id="searchTerm" type="text" placeholder="Search..">
+            <button onclick="search( document.getElementById( 'searchTerm' ).value )">Search</button>
+        </div>
+        <table id="showProducts"></table>
+    </div>
+
+    <!-- THIS IS THE AREA OF THE LOCATION PAGE -->
+    <div class="tap" id="locationTap">
+        <h1 style="">Locations</h1>
+        <img class="map" src="http://redsox.uoa.auckland.ac.nz/ds/map.png" alt="Locations">
+
+        <div class="footer" id="footer"></div>
+    </div>
+
+    <!-- THIS IS THE AREA OF THE NEWS PAGE -->
+    <div class="tap" id="newsTap">
+        <h1>News</h1>
+        <table id="showNews"></table>
+    </div>
+
+    <!-- THIS IS THE AREA OF GUEST BOOK PAGE -->
+    <div class="tap" id="guestBookTap">
+        <h1>Guest Book</h1>
+        <div class="form">
+            <div class="info">
+                <input id="fname" type="text" name="name" placeholder="Full name">
+            </div>
+            <p>Message</p>
+            <div>
+                <textarea id="message" rows="4" placeholder="Please leave the comment."></textarea>
+            </div>
+            <button onclick="submitComment();">Submit</button>
+        </div>
+        <h1>Recent Entries</h1>
+        <iframe id="recentEntries" src="http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/htmlcomments"></iframe>
+    </div>
+
+    <!-- THIS IS THE AREA OF THE LOGIN PAGE -->
+    <!-- The Modal -->
+    <div id="modal" class="modal" style="display: none">
+        <!-- Modal graph -->
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+            <ul class="tab-group">
+                <li class="tab active"><a href="#signup" onclick="changeTap('signup')">Sign Up</a></li>
+                <li class="tab"><a href="#login" onclick="changeTap('login')">Log In</a></li>
+            </ul>
+                <div class="tab-content">
+                    <div id="signup">
+                        <h1>Sign Up for Free</h1>
+                        <form action="/" method="post">
+                            <div class="top-row">
+                                <div class="field-wrap">
+                                    <label>
+                                        First Name<span class="req">*</span>
+                                    </label>
+                                    <input type="text" required autocomplete="off" />
+                                </div>
+                                <div class="field-wrap">
+                                    <label>
+                                        Last Name<span class="req">*</span>
+                                    </label>
+                                    <input type="text"required autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    User Name<span class="req">*</span>
+                                </label>
+                                <input type="text"required autocomplete="off"/>
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Set A Password<span class="req">*</span>
+                                </label>
+                                <input type="password"required autocomplete="off"/>
+                            </div>
+                            <button type="submit" class="button button-block"/>Get Started</button>
+                        </form>
+                    </div>
+
+                    <div id="login" style="display: none">
+                        <h1>Welcome Back!</h1>
+                        <form action="/" method="post">
+                            <div class="field-wrap">
+                                <label>
+                                    User Name<span class="req">*</span>
+                                </label>
+                                <input type="text"required autocomplete="off"/>
+                            </div>
+                            <div class="field-wrap">
+                                <label>
+                                    Password<span class="req">*</span>
+                                </label>
+                                <input type="password"required autocomplete="off"/>
+                            </div>
+                            <p class="forgot"><a href="#">Forgot Password?</a></p>
+                            <button class="button button-block"/>Log In</button>
+                        </form>
+                    </div>
+                </div><!-- tab-content -->
+            </div> <!-- /form -->
+        </div><!-- /model content-->
+    </div>
+</div>
+</body>
+</html>
