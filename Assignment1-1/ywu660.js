@@ -13,10 +13,6 @@ function showTap ( id ) {
         getLocations();
     }
 
-    if(id === "signUpTap") {
-
-    }
-
     document.getElementById( id ).style.display = "block";
 }
 
