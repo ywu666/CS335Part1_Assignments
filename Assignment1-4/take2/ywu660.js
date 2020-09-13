@@ -13,10 +13,6 @@ function showTap ( id ) {
         getLocations();
     }
 
-    if(id === "signUpTap") {
-
-    }
-
     document.getElementById( id ).style.display = "block";
 }
 
@@ -179,14 +175,26 @@ function showLocations( data ) {
     document.getElementById( "footer" ).innerHTML = content;
 }
 
-//The functions that related to the login/ register
 function login() {
+    var user = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
     const xhr = new XMLHttpRequest();
-    const uri = "http://redsox.uoa.auckland.ac.nz/CSS/CSService.svc/id";
-    xhr.open("GET", uri, true, user, password); xhr.withCredentials = true;
+    const uri = "http://localhost:8189/Service.svc/id";
+    xhr.open("GET", uri, true, user, password);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/json");
+
     xhr.onload = () => {
-        const version_d = document.getElementById("show_result");
-        version_d.innerHTML = xhr.responseText;
+        console.log(xhr.status);
+        if(xhr.status === 200) { //the user and password is valid
+            //show the products
+            document.getElementById( "loginTap" ).style.display = "none";
+            document.getElementById( "loginSuccess" ).style.display = "block";
+
+        } else {
+            alert("The account is invalid. Please sign up first.")
+        }
     }
     xhr.send(null);
 }
@@ -196,11 +204,10 @@ function singUp() {
     var address = document.getElementById("registerAddress").value;
     var password = document.getElementById("registerPassword").value;
 
-    var uri = "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/register";
+    var uri = "http://localhost:8188/DairyService.svc/register";
     var xhr = new XMLHttpRequest();
     xhr.open("POST", uri, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-
 
     xhr.send( JSON.stringify({
             Address : address,
@@ -224,34 +231,43 @@ function singUp() {
 }
 
 function buyNow( item ) {
-    window.open("http://redsox.uoa.auckland.ac.nz/dsa/Service.svc/buy?id=" + item.value, "_blank");
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://redsox.uoa.auckland.ac.nz/dsa/Service.svc/buy?id=" + item.value, true);
+    xhr.setRequestHeader("accept", "application/json");
+
+    xhr.onload = function() {
+        document.getElementById("buyMessage").innerText = xhr.responseText;
+        console.log(xhr.responseText);
+
+    }
+    xhr.send(null);
+    showModal();
 }
 
-// function showModal() {
-//     // get the relationship graph of the file that user wants to share
-//     const modal = document.getElementById( "modal" );
-//     if( modal.style.display === "none" ) {
-//         // if the model is already displayed, hide the graph
-//         modal.style.display = "block";
-//
-//     } else {
-//         // if the model is hidden, show it
-//         modal.style.display = "none";
-//     }
-// }
-//
-//
-// function closeModal() {
-//     const modal = document.getElementById( "modal" );
-//     modal.style.display = "none";
-// }
-//
-// window.onclick = function(event) {
-//     const modal = document.getElementById( "modal" );
-//     if (event.target == modal) {
-//         modal.style.display = "none";
-//     }
-// }
+function showModal() {
+    // get the relationship graph of the file that user wants to share
+    const modal = document.getElementById( "modal" );
+    if( modal.style.display === "none" ) {
+        // if the model is already displayed, hide the graph
+        modal.style.display = "block";
+
+    } else {
+        // if the model is hidden, show it
+        modal.style.display = "none";
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById( "modal" );
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    const modal = document.getElementById( "modal" );
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 
 
 

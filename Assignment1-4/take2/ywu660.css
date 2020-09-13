@@ -1,0 +1,226 @@
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 14px;
+}
+
+.tap {
+    padding-left: 2%;
+}
+
+p {
+    font-size: 16px;
+}
+
+#navigationBar {
+    overflow: auto;
+    margin-top: 5px;
+    background-color: antiquewhite;
+    padding: 15px;
+    text-align: center;
+    align-items: center;
+}
+
+#navigationBar a {
+    padding: 12px;
+    color: black;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+#navigationBar a:hover {
+    background-color: bisque;
+}
+
+span {
+ font-size: 4vw;
+}
+
+iframe {
+    width: 80%;
+    height: 250px;
+}
+
+.tap {
+    display: none;
+    overflow-x: auto;
+}
+
+.logo {
+    width: 6%;
+}
+
+.map, .cow{
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer {
+    text-align: center;
+    padding-bottom: 10px;
+    font-size: 16px;
+}
+
+#guestBookTap input, textarea {
+    width: calc(80% - 18px);
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid darkgray;
+    outline: none;
+}
+
+#guestBookTap input::placeholder {
+    color: #666666;
+}
+
+#signUpTap input {
+    margin-bottom:1%;
+}
+
+#loginTap input {
+    margin-bottom:1%;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    outline: none;
+    background: navajowhite;
+    font-size: 16px;
+    color: black;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+#guestBookTap button{
+    width: 80%;
+}
+
+button:hover  {
+    opacity: 1;
+}
+
+#searchTerm {
+    float: left;
+    width: calc(50% - 18px);
+    padding: 10px;
+    font-size: 16px;
+    outline:none;
+}
+
+table {
+    text-align: center;
+    margin: 2%;
+}
+
+table td {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 2%;
+}
+
+table img {
+    height: 20%;
+    display: inline-block;
+    margin-top: 2%;
+}
+
+table figcaption {
+    font-size: 16px;
+}
+
+#showNews {
+    text-align: left;
+}
+
+#showNews a {
+    text-decoration: none;
+    color: black;
+}
+
+#showNews a:hover {
+    background-color: bisque;
+}
+
+#locationTap a {
+    color: blue;
+}
+
+.req {
+    pointer-events: none;
+    font-size:22px;
+    margin:2px;
+    color: red;
+}
+
+.success {
+    color: forestgreen;
+}
+
+.failure {
+    color: red;
+}
+
+/* The css of time table model */
+.modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 130px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width:620px) {
+    /* For mobile phones: */
+    #navigationBar a {
+        text-align: center;
+        float: none;
+    }
+
+    td {
+        display:inline-block;
+    }
+
+    table img {
+        width: 40%;
+    }
+
+    .logo {
+        width: 11%;
+    }
+}
