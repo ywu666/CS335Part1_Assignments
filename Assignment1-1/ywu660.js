@@ -13,6 +13,10 @@ function showTap ( id ) {
         getLocations();
     }
 
+    if(id === "signUpTap") {
+
+    }
+
     document.getElementById( id ).style.display = "block";
 }
 
@@ -45,10 +49,10 @@ function showProducts( products ) {
         const record = products [i ];
 
         tableContent += "<td>"
-            + "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
+            + "<img take1='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
             + "<h3>" + record.Title + "</h3>"
             + "<figcaption>"+ record.Origin + " Price: $" + record.Price + " " + record.Type +"</figcaption>"
-            + "<button class='buyBtn' value='" + record.ItemID + "'>Buy Now</button>"
+            + "<button onclick='buyNow(this)' class='buyBtn' value='" + record.ItemId + "'>Buy Now</button>"
             + "</td>";
         count += 1;
 
@@ -81,7 +85,7 @@ function showNews( news ) {
     for( let i = 0; i < news.length; i++ ) {
         const record = news[ i ];
         newsContent += "<td>"
-            + "<img src=' " + record.enclosureField.urlField + " '/>"
+            + "<img take1=' " + record.enclosureField.urlField + " '/>"
             + "<h2> <a href='" + record.linkField + "' target=\"_blank\">" + record.titleField + "</a></h2>"
             + "<h2>"+ record.pubDateField + "</h2>"
             + "<p>"+ record.descriptionField + "</p>"
@@ -108,7 +112,7 @@ function submitComment() {
             response.onload = showComment();
             response.status;
         } )
-        .then( data => {
+        . then( data => {
             console.log( data )
         } );
 }
@@ -166,12 +170,51 @@ function showLocations( data ) {
 
     //display the information of locations
     content = "<p>Address:"+ address + " </p>"
-            + "Email:" + "<a id=\"email\" href=\"mailto:" + email + "\">"+ email +"</a>\n"
-            + "Tel:" + "<a id= \"phone\" href=\"tel:" + phone + "\">"+ phone +"‬</a>"
-            + "<a href=\"http://redsox.uoa.auckland.ac.nz/ds/mecard.svg\" target=\"_blank\"><br>\n"
+            + "Email:" + "<a id='email' href='mailto:" + email + "'>"+ email +"</a>\n"
+            + "Tel:" + "<a id='phone' href='tel:" + phone + "'>"+ phone +"‬</a>"
+            + "<a href='http://redsox.uoa.auckland.ac.nz/ds/mecard.svg' target='_blank'><br>\n"
             + "Add us to your address book.\n"
             + "</a>";
 
     document.getElementById( "footer" ).innerHTML = content;
 }
+
+function singUp() {
+    var username = document.getElementById("registerUsername").value;
+    var address = document.getElementById("registerAddress").value;
+    var password = document.getElementById("registerPassword").value;
+
+    var uri = "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/register";
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", uri, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+
+    xhr.send( JSON.stringify({
+            Address : address,
+            Name : username,
+            Password : password
+        } )
+    );
+
+    xhr.onload = function() {
+        document.getElementById("registerUsername").value = "";
+        document.getElementById("registerAddress").value = "";
+        document.getElementById("registerPassword").value = "";
+
+        if (xhr.responseText.includes("registered")) {
+            document.getElementById("successMsg").classList.add("success");
+        } else {
+            document.getElementById("successMsg").classList.add("failure");
+        }
+        document.getElementById("successMsg").innerHTML = xhr.responseText;
+    }
+}
+
+function buyNow( item ) {
+    window.open("http://redsox.uoa.auckland.ac.nz/dsa/Service.svc/buy?id=" + item.value, "_blank");
+}
+
+
+
 
