@@ -24,7 +24,7 @@ function hideTaps() {
 }
 
 function getProducts() {
-    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/items", {
+    fetch ( "http://localhost:8188/DairyService.svc/items", {
         headers: {
             'Accept': 'application/json'
         },
@@ -45,7 +45,7 @@ function showProducts( products ) {
         const record = products [i ];
 
         tableContent += "<td>"
-            + "<img src='http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
+            + "<img src='http://localhost:8188/DairyService.svc/itemimg?id=" + record.ItemId + "'/>"
             + "<h3>" + record.Title + "</h3>"
             + "<figcaption>"+ record.Origin + " Price: $" + record.Price + " " + record.Type +"</figcaption>"
             + "<button onclick='buyNow(this)' class='buyBtn' value='" + record.ItemId + "'>Buy Now</button>"
@@ -62,7 +62,7 @@ function showProducts( products ) {
 }
 
 function getNews () {
-    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/news", {
+    fetch ( "http://localhost:8188/DairyService.svc/news", {
         headers: {
             'Accept': 'application/json'
         },
@@ -96,7 +96,7 @@ function submitComment() {
     const name = document.getElementById( "fname" ).value;
     const comment = document.getElementById( "message" ).value;
 
-    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/comment?name=" + name, {
+    fetch ( "http://localhost:8188/DairyService.svc/comment?name=" + name, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -123,7 +123,7 @@ function showComment() {
 }
 
 function search( data ) {
-    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/search?term=" + data, {
+    fetch ( "http://localhost:8188/DairyService.svc/search?term=" + data, {
         headers: {
             'Accept': 'application/json'
         },
@@ -137,7 +137,7 @@ function search( data ) {
 }
 
 function getLocations () {
-    fetch ( "http://redsox.uoa.auckland.ac.nz/ds/DairyService.svc/vcard" )
+    fetch ( "http://localhost:8188/DairyService.svc/vcard" )
         .then( response =>
             response.text()
         )
@@ -186,12 +186,10 @@ function login() {
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onload = () => {
-        console.log(xhr.status);
         if(xhr.status === 200) { //the user and password is valid
             //show the products
             document.getElementById( "loginTap" ).style.display = "none";
             document.getElementById( "loginSuccess" ).style.display = "block";
-
         } else {
             alert("The account is invalid. Please sign up first.")
         }
@@ -232,13 +230,11 @@ function singUp() {
 
 function buyNow( item ) {
     var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://redsox.uoa.auckland.ac.nz/dsa/Service.svc/buy?id=" + item.value, true);
+    xhr.open("GET", "http://localhost:8189/Service.svc/buy?id=" + item.value, true);
     xhr.setRequestHeader("accept", "application/json");
 
     xhr.onload = function() {
         document.getElementById("buyMessage").innerText = xhr.responseText;
-        console.log(xhr.responseText);
-
     }
     xhr.send(null);
     showModal();
