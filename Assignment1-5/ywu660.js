@@ -19,16 +19,17 @@ function setData( data ) {
     let newCases = "+" + newestDay.new_daily_cases;
 
     //Set the newest data
-    document.getElementById("numOfInfections").innerText = newestDay.total_cases;
-    document.getElementById("newCasesTodayTotal").innerText = newCases;
-    document.getElementById("newDeathsTodayTotal").innerText = newestDay.new_daily_deaths;
-    document.getElementById("recoveredNum").innerText = newestDay.total_recoveries;
-    document.getElementById("deathsNum").innerText = newestDay.total_deaths;
+    document.getElementById("numOfInfections").innerText = numberWithCommas( newestDay.total_cases );
+    document.getElementById("newCasesTodayTotal").innerText = numberWithCommas( newCases );
+    document.getElementById("newDeathsTodayTotal").innerText = numberWithCommas( newestDay.new_daily_deaths );
+    document.getElementById("recoveredNum").innerText = numberWithCommas( newestDay.total_recoveries );
+    document.getElementById("deathsNum").innerText = numberWithCommas( newestDay.total_deaths );
 
     //Calculate the unresolved cases
-    var unresolved = newestDay.total_cases - newestDay.total_recoveries - newestDay.total_deaths;
+    let unresolved = newestDay.total_cases - newestDay.total_recoveries - newestDay.total_deaths;
     document.getElementById("unresolvedNum").innerText = unresolved;
 }
+
 function getToday() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0') - 1;
@@ -39,6 +40,11 @@ function getToday() {
     today = mm + '/' + dd + '/' + yyyy;
     return today;
 }
+
+function numberWithCommas( x ) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 
 //Call the functions
 getData();
