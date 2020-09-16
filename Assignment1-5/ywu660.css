@@ -72,7 +72,7 @@ a:hover {
 }
 
 #recoveredNum {
-    color: green;
+    color: limegreen;
     font-weight: bolder;
 }
 
@@ -138,9 +138,10 @@ a:hover {
     fill: dodgerblue;
 }
 
-.death {
-    fill: red;
+.recover {
+    fill: limegreen;
 }
+
 
 
 

@@ -96,7 +96,7 @@ function drawPieChart( newestDay ) {
             "value": newestDay.total_cases
         }, {
             "name": "Recovered",
-            "color": "green",
+            "color": "limegreen",
             "value": newestDay.total_recoveries
         }, {
             "name": "Serious Cases",
@@ -159,7 +159,6 @@ function drawPieChart( newestDay ) {
 
 var points = document.getElementById("data"), posXs = [], posYs = [], posDeathY =[];
 function drawLineChart( data, newestDay ) {
-    //console.log(data);
     var mmEnd = parseInt(getMonth()),
         xLabels = document.getElementById("x-labels"),
         yLabels = document.getElementById("y-labels"),
@@ -179,7 +178,6 @@ function drawLineChart( data, newestDay ) {
 
     //Draw the start point
     drawStartPoint(370, "total");
-    drawStartPoint(364 , "death");
 
     //Draw the x grid labels
     var x = 150;
@@ -196,17 +194,19 @@ function drawLineChart( data, newestDay ) {
         //Draw the points
         var date =  i + "/01/20";
         drawPoints(data[date].total_cases, x, "total");
-        //drawPoints(data[date].total_deaths, x);
-        //drawPoints(data[date].total_deaths, x);
+        drawPoints(data[date].total_recoveries, x, "recover");
         x = x + 146;
     }
 
-    connectPoints("dodgerblue");
-    posTotalY = [];
+    connectPoints("dodgerblue", "total");
+    connectPoints("limegreen", "recover");
 }
 
 function convertNumToPos( num, className) {
-    let posY = 0;
+    let posY = 370;
+    if(num == 0) {
+        return 370;
+    }
     let remainder = num % 500;
     let tenth = (num - remainder) / 500;
     posY = posYs[tenth] - (remainder / (500 / 86));
@@ -216,6 +216,7 @@ function convertNumToPos( num, className) {
 function drawStartPoint( posY, className) {
     posXs.push(90);
     posTotalY.push(posY);
+    posRecoverY.push(posY);
 
     var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("class", className);
@@ -225,11 +226,16 @@ function drawStartPoint( posY, className) {
     points.appendChild(circle);
 }
 
-var posTotalY = [];
+var posTotalY = [], posRecoverY = [];
 function drawPoints(num, x, className) {
     //Draw points
     var posY = convertNumToPos( num );
-    posTotalY.push(posY);
+
+    if(className == "total") {
+        posTotalY.push(posY);
+    } else {
+        posRecoverY.push(posY);
+    }
 
     var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("class", className);
@@ -239,8 +245,7 @@ function drawPoints(num, x, className) {
     points.appendChild( circle );
 }
 
-function connectPoints( colour) {
-    console.log(posXs);
+function connectPoints( colour, className) {
     var polyLine = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
     polyLine.setAttribute("id", "totalLine")
     polyLine.setAttribute("fill", "none");
@@ -248,10 +253,15 @@ function connectPoints( colour) {
     polyLine.setAttribute("stroke-width", "3");
 
     var pointsLine = "";
-    for(let i=0;i <posXs.length;i++) {
-        pointsLine = pointsLine + posXs[i] + "," + posTotalY[i] + " ";
+    if(className == "total") {
+        for(let i=0;i <posXs.length;i++) {
+            pointsLine = pointsLine + posXs[i] + "," + posTotalY[i] + " ";
+        }
+    } else {
+        for(let i=0;i <posXs.length;i++) {
+            pointsLine = pointsLine + posXs[i] + "," + posRecoverY[i] + " ";
+        }
     }
-    console.log(points);
 
     polyLine.setAttribute("points", pointsLine)
     points.appendChild(polyLine);
