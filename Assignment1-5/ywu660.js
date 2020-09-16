@@ -11,6 +11,7 @@ function getData() {
             var newestDay = getTodayData( data );
             setCaseStatistics( newestDay );
             drawPieChart( newestDay );
+            drawLineChart( data.timelineitems[0], newestDay )
         } );
 }
 
@@ -52,12 +53,18 @@ function setCaseStatistics( newestDay ) {
 function getToday() {
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0') - 1;
-    var mm = String(today.getMonth() + 1).padStart(2, '0').substring(1,2); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0').substring(1, 2); //January is 0!
     var yyyy = today.getFullYear() + "";
     yyyy = yyyy.substring(2, 4);
 
     today = mm + '/' + dd + '/' + yyyy;
     return today;
+}
+
+function getMonth() {
+    var today = new Date();
+    var mm = String(today.getMonth() + 1).padStart(2, '0').substring(1, 2); //January is 0!
+    return mm;
 }
 
 /**
@@ -119,8 +126,8 @@ function drawPieChart( newestDay ) {
 
         // Set attributes (self explanatory)
         circle.setAttribute("class", "pie-chart-value");
-        circle.setAttribute("cx", 150);
-        circle.setAttribute("cy", 150);
+        circle.setAttribute("cx", "150");
+        circle.setAttribute("cy", "150");
         circle.setAttribute("r", radius);
 
         // Set dash on circle
@@ -148,6 +155,106 @@ function drawPieChart( newestDay ) {
         // Append to list.
         list.appendChild(listItem);
     }
+}
+
+var points = document.getElementById("data"), posXs = [], posYs = [], posDeathY =[];
+function drawLineChart( data, newestDay ) {
+    //console.log(data);
+    var mmEnd = parseInt(getMonth()),
+        xLabels = document.getElementById("x-labels"),
+        yLabels = document.getElementById("y-labels"),
+        mmStart = mmEnd - 4;
+
+    //Draw the y gid labels
+    var y = 373;
+    for(let i = 0;i < 5; i++) {
+        posYs.push(y);
+        var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", "80");
+        text.setAttribute("y", y);
+        text.innerHTML = "" + (i * 500);
+        yLabels.appendChild(text);
+        y = y - 86;
+    }
+
+    //Draw the start point
+    drawStartPoint(370, "total");
+    drawStartPoint(364 , "death");
+
+    //Draw the x grid labels
+    var x = 150;
+    for(let i = mmStart; i <= mmEnd;i++) {
+        posXs.push(x);
+
+        //Create text
+        var text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", x);
+        text.setAttribute("y", 400);
+        text.innerHTML = "1/" + i + "";
+        xLabels.appendChild(text);
+
+        //Draw the points
+        var date =  i + "/01/20";
+        drawPoints(data[date].total_cases, x, "total");
+        //drawPoints(data[date].total_deaths, x);
+        //drawPoints(data[date].total_deaths, x);
+        x = x + 146;
+    }
+
+    connectPoints("dodgerblue");
+    posTotalY = [];
+}
+
+function convertNumToPos( num, className) {
+    let posY = 0;
+    let remainder = num % 500;
+    let tenth = (num - remainder) / 500;
+    posY = posYs[tenth] - (remainder / (500 / 86));
+    return posY;
+}
+
+function drawStartPoint( posY, className) {
+    posXs.push(90);
+    posTotalY.push(posY);
+
+    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("class", className);
+    circle.setAttribute("cx", "90");
+    circle.setAttribute("cy", posY);
+    circle.setAttribute("r", "4");
+    points.appendChild(circle);
+}
+
+var posTotalY = [];
+function drawPoints(num, x, className) {
+    //Draw points
+    var posY = convertNumToPos( num );
+    posTotalY.push(posY);
+
+    var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    circle.setAttribute("class", className);
+    circle.setAttribute("cx", x);
+    circle.setAttribute("cy", posY);
+    circle.setAttribute("r", "4");
+    points.appendChild( circle );
+}
+
+function connectPoints( colour) {
+    console.log(posXs);
+    var polyLine = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
+    polyLine.setAttribute("id", "totalLine")
+    polyLine.setAttribute("fill", "none");
+    polyLine.setAttribute("stroke", colour);
+    polyLine.setAttribute("stroke-width", "3");
+
+    var pointsLine = "";
+    for(let i=0;i <posXs.length;i++) {
+        pointsLine = pointsLine + posXs[i] + "," + posTotalY[i] + " ";
+    }
+    console.log(points);
+
+    polyLine.setAttribute("points", pointsLine)
+    points.appendChild(polyLine);
 }
 
 

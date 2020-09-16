@@ -1,3 +1,6 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+}
 .container {
     width: 100%;
 }
@@ -10,11 +13,16 @@
     text-align: center!important;
 }
 
+.center {
+    align-items: center;
+    justify-content: center
+}
+
 .col-4 {
-    -ms-flex: 0 0 33.333333%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
     position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
 }
 
 /*Topological design*/
@@ -34,11 +42,6 @@ h2 {
     line-height: 32px;
     margin: 0 0 14px;
 }
-
-h4, h3 {
-    font-family: 'Open Sans', sans-serif;
-}
-
 
 p {
     color: #222;
@@ -84,9 +87,7 @@ a:hover {
 }
 
 /*CSS for the pie Chart*/
-#con {
-    resize: both;
-    overflow: hidden;
+#pie-chart {
     display: inline-block;
     width: 20em;
     height: 20em;
@@ -97,3 +98,54 @@ a:hover {
     fill: none;
     stroke-width: 50;
 }
+
+/*CSS for line chart*/
+.graph .labels.x-labels {
+    text-anchor: middle;
+}
+
+.graph .labels.y-labels {
+    text-anchor: end;
+}
+
+.graph {
+    height: 500px;
+    width: 800px;
+}
+
+.graph .grid {
+    stroke: #ccc;
+    stroke-dasharray: 0;
+    stroke-width: 1;
+}
+
+.labels {
+    font-size: 13px;
+}
+
+.label-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    fill: black;
+}
+
+.data {
+    stroke-width: 1;
+}
+
+.total {
+    fill: dodgerblue;
+}
+
+.death {
+    fill: red;
+}
+
+
+
+
+
+
+
+

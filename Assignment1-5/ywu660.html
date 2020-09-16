@@ -10,14 +10,14 @@
 </head>
 <body>
 <div id="header">
-    <h2 style="text-align: center">New Zealand COVID-19 Cases(Unofficial Dashboard)</h2>
+    <h1 style="text-align: center">New Zealand COVID-19 Cases(Unofficial Dashboard)</h1>
     <p style="text-align: center">Data updated daily: Sourced publicly from Ministry of Health</p>
 </div>
 
 <!--THE CASES STATISTICS-->
 <div class="container">
 <!--    <h3 style="text-align: center">Case Statistics (in 1 Last 24hrs)</h3>-->
-        <div class="row">
+    <div class="row">
         <div class="col-4 text-center">
             <h1 id="numOfInfections">0</h1>
             <h4>Infected</h4>
@@ -46,20 +46,39 @@
             <h4>Serious Cases</h4>
         </div>
     </div>
-</div>
 
-<!--Pie Chart-->
-<div id="con">
-    <ul id="pie-values"></ul>
-    <svg width="100%" height="100%" id="pie-chart"
-         xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 400">
-        <style type="text/css">
-            circle:hover {
-                opacity: 0.8;
-            }
-        </style>
-    </svg>
-</div>
+    <!--Pie Chart-->
+    <div class="row center" >
+        <svg xmlns="http://www.w3.org/2000/svg" id="pie-chart">
+            <style type="text/css">
+                circle:hover {
+                    opacity: 0.8;
+                }
+            </style>
+        </svg>
+        <ul id="pie-values" style="position: relative; top:-50px; left: 60px"></ul>
+    </div>
 
+<!-- Line Chart -->
+    <div class="row center">
+        <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+             class="graph" aria-labelledby="title">
+            <title id="title">A line chart showing Daily Cases</title>
+            <g class="grid x-grid" id="xGrid">
+                <line x1="90" x2="90" y1="5" y2="370"></line>
+            </g>
+            <g class="grid y-grid" id="yGrid">
+                <line x1="90" x2="800" y1="370" y2="370"></line>
+            </g>
+            <g class="labels x-labels" id="x-labels">
+                <text x="400" y="440" class="label-title">Date</text>
+            </g>
+            <g class="labels y-labels" id="y-labels">
+                <text x="120" y="200" class="label-title" transform="rotate(-90, 20, 200)">Total Cases</text>
+            </g>
+            <g class="data" id="data" data-setname="Total Cases"></g>
+        </svg>
+    </div>
+</div>
 </body>
 </html>
