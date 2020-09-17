@@ -157,7 +157,12 @@ function drawPieChart( newestDay ) {
     }
 }
 
-var points = document.getElementById("data"), posXs = [], posYs = [], posDeathY =[];
+/**
+ * This function will dynamically draw the line for recover cases as well as infected cases
+ * @type {HTMLElement}
+ */
+var points = document.getElementById("data");
+var posXs = [], posYs = [];
 function drawLineChart( data, newestDay ) {
     var mmEnd = parseInt(getMonth()),
         xLabels = document.getElementById("x-labels"),
@@ -176,7 +181,7 @@ function drawLineChart( data, newestDay ) {
         y = y - 86;
     }
 
-    //Draw the start point
+    //Draw the start point for both recover and total
     drawStartPoint(370, "total");
 
     //Draw the x grid labels
@@ -197,11 +202,17 @@ function drawLineChart( data, newestDay ) {
         drawPoints(data[date].total_recoveries, x, "recover");
         x = x + 146;
     }
-
+    //Draw the lines to connect all the points
     connectPoints("dodgerblue", "total");
     connectPoints("limegreen", "recover");
 }
 
+/**
+ * This function will convert the num of cases to the pos in the line chart.
+ * @param num the num of cases
+ * @param className
+ * @returns {number}
+ */
 function convertNumToPos( num, className) {
     let posY = 370;
     if(num == 0) {
@@ -218,6 +229,7 @@ function drawStartPoint( posY, className) {
     posTotalY.push(posY);
     posRecoverY.push(posY);
 
+    //This is the start points
     var circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     circle.setAttribute("class", className);
     circle.setAttribute("cx", "90");
@@ -226,6 +238,10 @@ function drawStartPoint( posY, className) {
     points.appendChild(circle);
 }
 
+/**
+ * This functions is used to draw the points for recover and total.
+ * @type {*[]}
+ */
 var posTotalY = [], posRecoverY = [];
 function drawPoints(num, x, className) {
     //Draw points
@@ -245,6 +261,11 @@ function drawPoints(num, x, className) {
     points.appendChild( circle );
 }
 
+/**
+ * This function is used to draw the polyline that will connect all the points
+ * @param colour
+ * @param className
+ */
 function connectPoints( colour, className) {
     var polyLine = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
     polyLine.setAttribute("id", "totalLine")

@@ -9,45 +9,46 @@
     <link rel="shortcut icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/5/55/Coronavirus_cartoon.svg">
 </head>
 <body>
-<div id="header">
-    <h1 style="text-align: center">New Zealand COVID-19 Cases(Unofficial Dashboard)</h1>
-    <p style="text-align: center">Data updated daily: Sourced publicly from Ministry of Health</p>
+<div id="header" class="text-center">
+    <h1>New Zealand COVID-19 Cases(Unofficial Dashboard)</h1>
+    <p>Data updated daily: Sourced publicly from Ministry of Health<br>
+        The first case was reported on February 28th 2020</p>
 </div>
 
 <!--THE CASES STATISTICS-->
-<div class="container">
-<!--    <h3 style="text-align: center">Case Statistics (in 1 Last 24hrs)</h3>-->
+<div class="container text-center">
     <div class="row">
-        <div class="col-4 text-center">
+        <div class="col-4">
             <h1 id="numOfInfections">0</h1>
             <h4>Infected</h4>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-4">
             <h1 id="deathsNum">0</h1>
             <h4>Deaths</h4>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-4">
             <h1 id="recoveredNum">0</h1>
             <h4>Recovered</h4>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-4 text-center">
+        <div class="col-4">
             <h1 id="newCasesTodayTotal">0</h1>
             <h4>New Cases Today</h4>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-4">
             <h1 id="newDeathsTodayTotal">0</h1>
             <h4>New Deaths Today</h4>
         </div>
-        <div class="col-4 text-center">
+        <div class="col-4">
             <h1 id="unresolvedNum">0</h1>
             <h4>Serious Cases</h4>
         </div>
     </div>
-
+<hr>
     <!--Pie Chart-->
+    <h3>Types of cases</h3>
     <div class="row center" >
         <svg xmlns="http://www.w3.org/2000/svg" id="pie-chart">
             <style type="text/css">
@@ -56,10 +57,11 @@
                 }
             </style>
         </svg>
-        <ul id="pie-values" style="position: relative; top:-50px; left: 60px"></ul>
+        <ul id="pie-values" style="position: relative; top:-50px; left: 60px; text-align: left"></ul>
     </div>
-
+<hr>
 <!-- Line Chart -->
+    <h3>Infected / Recoveries with the coronavirus outbreak in New Zealand</h3>
     <div class="row center">
         <svg version="1.2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
              class="graph" aria-labelledby="title">
